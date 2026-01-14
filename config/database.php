@@ -18,6 +18,7 @@ class Database {
             $this->username,
             $this->password
         );
+        $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     }
 
