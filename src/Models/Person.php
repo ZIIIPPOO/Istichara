@@ -1,12 +1,19 @@
 <?php 
+require_once './config/database.php';
 
 abstract class Person
 {
-    private $id;
-    private $name;
-    private $cityId;
-    private $anneesExperience;
-    private $tarifHoraire;
+    protected $id;
+    protected $name;
+    protected $cityId;
+    protected $anneesExperience;
+    protected $tarifHoraire;
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance()->getConnection();
+    }
 
     public function getId(){return $this->id;}
     public function getName(){return $this->name;}
