@@ -6,7 +6,7 @@ if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
     $_GET['url'] = $uri;
 }
 
-require_once '../src/Helpers/Router.php';
+require_once __DIR__.'/../src/Helpers/Router.php';
 
 
 Router::get('', 'AvocatController', 'index');
@@ -25,7 +25,6 @@ Router::get('huissier/update', 'HuissierController', 'update');
 Router::get('huissier/delete', 'HuissierController', 'delete');
 
 
-
-Router::dispatch(); 
+Router::dispatch();
 
 ?>
