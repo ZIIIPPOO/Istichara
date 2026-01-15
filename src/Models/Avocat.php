@@ -1,5 +1,5 @@
 <?php
-require_once 'Person.php';
+require_once __DIR__ . '/Person.php';
 class Avocat extends Person
 {
     private $specialites;
@@ -13,7 +13,8 @@ class Avocat extends Person
 
     public function getAll()
     {
-        $sql = "SELECT * FROM avocats";
+        $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
+JOIN cities ON avocats.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -38,10 +39,28 @@ class Avocat extends Person
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$this->name, $this->cityId, $this->specialites, $this->anneesExperience, $this->tarifHoraire, $this->consultationEnLigne, $this->id]);
     }
-    public function delete()
+    public function delete($id)
     {
         $sql = "DELETE FROM avocats WHERE id = ?";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$this->id]);
+        return $stmt->execute([$id]);
+    }
+    public function getVilleId($city)
+    {
+        $sql = "SELECT id FROM cities WHERE name = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$city]);
+        $res = $stmt->fetch();
+        $id = $res['id'];
+        return $id;
+    }
+    public function getCityName($id)
+    {
+        $sql = "SELECT name FROM cities WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        $res = $stmt->fetch();
+        $name = $res['name'];
+        return $name;
     }
 }
