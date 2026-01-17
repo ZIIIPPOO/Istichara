@@ -10,7 +10,12 @@ class AvocatController
         $avocatss = $avocat->getAll();
         $total = count($avocatss);
 
+        $resultPerPage = 5;
 
+        $totalPages = ceil($total / $resultPerPage);
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $start = ($page - 1) * $resultPerPage;
+        $avocats = $avocat->getAllPagination($start, $resultPerPage);
         // var_dump($avocats);
         // return;
 
