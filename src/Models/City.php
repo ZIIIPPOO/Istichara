@@ -3,11 +3,18 @@
 class City
 {
     private $id;
+    private $db;
     private $name;
 
-    public function getId(){return $this->id;}
-    public function getName(){return $this->name;}
-
-    public function setId($id){$this->id = $id;}
-    public function setName($name){$this->name = $name;}
+    public function __construct()
+    {
+        $this->db = Database::getInstance()->getConnection();
+    }
+    public function getAll()
+    {
+        $sql = "SELECT name FROM cities";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
