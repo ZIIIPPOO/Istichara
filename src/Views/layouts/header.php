@@ -39,7 +39,7 @@
                             Huissiers de Justice
                         </a>
                         
-                        <a href="/statistiques" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                        <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
                             Statistiques
                         </a>
