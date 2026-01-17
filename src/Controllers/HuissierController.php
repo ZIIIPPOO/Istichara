@@ -38,7 +38,7 @@ class HuissierController
             $huissier->setTypeActes($_POST['types-actes']);
             $huissier->setTarifHoraire($_POST['tarif_horaire']);
 
-            $cityId = $huissier->getVilleId($_POST['ville']);
+            $cityId = $cityy->getIdByName($_POST['ville']);
             $huissier->setCityId($cityId);
 
             $huissier->create();
@@ -63,7 +63,7 @@ class HuissierController
 
             $name = $result['name'];
             $villeId = $result['city_id'];
-            $city = $huissier->getCityName($villeId);
+            $city = $cityy->getNameById($villeId);
             $anneesExp = $result['annees_experience'];
             $tarifHoraire = $result['tarif_horaire'];
             $typeOfActes = $result['type_actes'];
@@ -82,7 +82,7 @@ class HuissierController
             $huissier->setTypeActes($_POST['types-actes']);
             $huissier->setTarifHoraire($_POST['tarif_horaire']);
 
-            $cityId = $huissier->getVilleId($_POST['ville']);
+            $cityId = $cityy->getIdByName($_POST['ville']);
             $huissier->setCityId($cityId);
 
             $huissier->update();

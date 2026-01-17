@@ -41,7 +41,7 @@ class AvocatController
             $avocat->setTarifHoraire($_POST['tarif_horaire']);
             $avocat->setConsultationEnligne($_POST['consultation_en_ligne']);
             // 
-            $cityId = $avocat->getVilleId($_POST['ville']);
+            $cityId = $cityy->getIdByName($_POST['ville']);
             $avocat->setCityId($cityId);
             // echo '<pre>';
             // echo $cityId;
@@ -67,7 +67,7 @@ class AvocatController
             // var_dump($result);
             $name = $result['name'];
             $villeId = $result['city_id'];
-            $city = $avocat->getCityName($villeId);
+            $city = $cityy->getNameById($villeId);
             // echo $city;
             $anneesExp = $result['annees_experience'];
             $tarifHoraire = $result['tarif_horaire'];
@@ -95,7 +95,7 @@ class AvocatController
             $avocat->setTarifHoraire($_POST['tarif_horaire']);
             $avocat->setConsultationEnligne($_POST['consultation_en_ligne']);
             // 
-            $cityId = $avocat->getVilleId($_POST['ville']);
+            $cityId = $cityy->getIdByName($_POST['ville']);
             $avocat->setCityId($cityId);
             // echo '<pre>';
             // echo $cityId;
