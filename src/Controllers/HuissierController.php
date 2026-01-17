@@ -10,7 +10,12 @@ class HuissierController
         $huissierss = $huissier->getAll();
         $total = count($huissierss);
 
+        $resultPerPage = 5;
 
+        $totalPages = ceil($total / $resultPerPage);
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $start = ($page - 1) * $resultPerPage;
+        $huissiers = $huissier->getAllPagination($start, $resultPerPage);
 
         require_once __DIR__ . '/../Views/layouts/header.php';
         require_once __DIR__ . '/../Views/huissier/index.php';
