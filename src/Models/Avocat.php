@@ -57,24 +57,6 @@ JOIN cities ON avocats.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$id]);
     }
-    public function getVilleId($city)
-    {
-        $sql = "SELECT id FROM cities WHERE name = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$city]);
-        $res = $stmt->fetch();
-        $id = $res['id'];
-        return $id;
-    }
-    public function getCityName($id)
-    {
-        $sql = "SELECT name FROM cities WHERE id = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-        $res = $stmt->fetch();
-        $name = $res['name'];
-        return $name;
-    }
     public function getTopThree()
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats 
