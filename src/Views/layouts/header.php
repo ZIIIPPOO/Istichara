@@ -6,7 +6,7 @@
     <title><?= $title ?? 'ISTICHARA - Plateforme Juridique Marocaine' ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../../public//assets//css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="h-full">
     <div class="min-h-full">
