@@ -8,9 +8,9 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/avocat/store" method="POST" enctype="multipart/form-data">
+            <form action="/avocat/create" method="POST" enctype="multipart/form-data">
                 <!-- Form Content -->
-                <div class="p-8 space-y-6">
+                <div class="p-8 space-y-6"> 
                     <!-- Informations Générales -->
                     <div class="border-b border-gray-200 pb-6">
                         <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
@@ -21,39 +21,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Nom <span class="text-red-500">*</span>
+                                    Name <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" id="nom" name="nom" required 
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent" 
                                     placeholder="ex: Alami">
                             </div>
 
-                            <div>
-                                <label for="prenom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Prénom <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" id="prenom" name="prenom" required 
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent" 
-                                    placeholder="ex: Ahmed">
-                            </div>
-
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Email <span class="text-red-500">*</span>
-                                </label>
-                                <input type="email" id="email" name="email" required 
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent" 
-                                    placeholder="ex: ahmed.alami@example.com">
-                            </div>
-
-                            <div>
-                                <label for="telephone" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Téléphone <span class="text-red-500">*</span>
-                                </label>
-                                <input type="tel" id="telephone" name="telephone" required 
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent" 
-                                    placeholder="ex: +212 6XX XXX XXX">
-                            </div>
 
                             <div>
                                 <label for="ville" class="block text-sm font-medium text-gray-700 mb-2">
@@ -61,13 +35,9 @@
                                 </label>
                                 <select id="ville" name="ville" required 
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                                    <option value="">Sélectionner une ville</option>
-                                    <option value="Casablanca">Casablanca</option>
-                                    <option value="Rabat">Rabat</option>
-                                    <option value="Marrakech">Marrakech</option>
-                                    <option value="Fès">Fès</option>
-                                    <option value="Tanger">Tanger</option>
-                                    <option value="Agadir">Agadir</option>
+                                    <?php foreach ($cities as $c): ?>
+                                        <option <?= $city === $c['name'] ? 'selected' : ''  ?>><?= $c['name'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
 
@@ -92,41 +62,11 @@
                         <div class="space-y-6">
                             <!-- Spécialités -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                                <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
                                     Spécialités <span class="text-red-500">*</span>
                                 </label>
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit pénal" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit pénal</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit civil" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit civil</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit de la famille" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit de la famille</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit des affaires" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit des affaires</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit immobilier" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit immobilier</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit du travail" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit du travail</span>
-                                    </label>
-                                </div>
+                                <input type="text" id="specialites" name="specialites" required value=""
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
 
                             <!-- Tarif horaire -->
@@ -158,16 +98,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Biographie -->
-                    <div>
-                        <label for="biographie" class="block text-sm font-medium text-gray-700 mb-2">
-                            Biographie
-                        </label>
-                        <textarea id="biographie" name="biographie" rows="4"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent resize-none" 
-                            placeholder="Décrivez le parcours professionnel..."></textarea>
                     </div>
 
                     <!-- Action Buttons -->
