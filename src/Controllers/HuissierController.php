@@ -59,6 +59,7 @@ class HuissierController
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $huissier = new Huissier();
+            $cityy = new City();
             $result = $huissier->getById($id);
 
             $name = $result['name'];
@@ -68,7 +69,6 @@ class HuissierController
             $tarifHoraire = $result['tarif_horaire'];
             $typeOfActes = $result['type_actes'];
 
-            $cityy = new City();
             $cities = $cityy->getAll();
         }
 

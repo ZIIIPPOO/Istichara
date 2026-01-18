@@ -64,6 +64,7 @@ class AvocatController
             $id = $_GET['id'];
             $avocat = new Avocat();
             $result = $avocat->getById($id);
+            $cityy = new City();
             // var_dump($result);
             $name = $result['name'];
             $villeId = $result['city_id'];
@@ -74,7 +75,6 @@ class AvocatController
             $consultationEnLigne = $result['consultation_en_ligne'];
             $specialites = $result['specialites'];
             // echo "<pre>";
-            $cityy = new City();
             $cities = $cityy->getAll();
             // echo $cities[1]['name']
         }
