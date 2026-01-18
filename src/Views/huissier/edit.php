@@ -6,46 +6,22 @@
         </div>
 
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/huissier/update" method="POST">
+            <form action="/huissier/edit?id=<?= $_GET['id'] ?? '' ?>" method="POST">
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?? '' ?>">
-                
+
                 <div class="p-8 space-y-6">
                     <div class="border-b border-gray-200 pb-6">
                         <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                             <i class="fas fa-user-circle text-amber-600 mr-2"></i>
                             Informations Générales
                         </h2>
-                        
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Nom <span class="text-red-500">*</span>
+                                    Name <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nom" name="nom" required value="El Fassi"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                            </div>
-
-                            <div>
-                                <label for="prenom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Prénom <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" id="prenom" name="prenom" required value="Karim"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                            </div>
-
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Email <span class="text-red-500">*</span>
-                                </label>
-                                <input type="email" id="email" name="email" required value="karim.elfassi@example.com"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                            </div>
-
-                            <div>
-                                <label for="telephone" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Téléphone <span class="text-red-500">*</span>
-                                </label>
-                                <input type="tel" id="telephone" name="telephone" required value="+212 623456789"
+                                <input type="text" id="nom" name="nom" required value="<?= $result['name'] ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
 
@@ -53,13 +29,11 @@
                                 <label for="ville" class="block text-sm font-medium text-gray-700 mb-2">
                                     Ville <span class="text-red-500">*</span>
                                 </label>
-                                <select id="ville" name="ville" required 
+                                <select id="ville" name="ville" required
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                                    <option value="Casablanca">Casablanca</option>
-                                    <option value="Rabat">Rabat</option>
-                                    <option value="Marrakech" selected>Marrakech</option>
-                                    <option value="Fès">Fès</option>
-                                    <option value="Tanger">Tanger</option>
+                                    <?php foreach ($cities as $c): ?>
+                                        <option <?= $city === $c['name'] ? 'selected' : ''  ?>><?= $c['name'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
 
@@ -67,7 +41,7 @@
                                 <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">
                                     Années d'Expérience <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" id="experience" name="annees_experience" min="0" required value="8"
+                                <input type="number" id="experience" name="annees_experience" min="0" required value="<?= $result['annees_experience'] ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
                         </div>
@@ -80,45 +54,22 @@
                         </h2>
 
                         <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                             <div>
+                                <label for="types-actes" class="block text-sm font-medium text-gray-700 mb-2">
                                     Types d'Actes <span class="text-red-500">*</span>
                                 </label>
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="types_actes[]" value="Signification" checked
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Signification</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="types_actes[]" value="Exécution" checked
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Exécution</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="types_actes[]" value="Constats"
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Constats</span>
-                                    </label>
-                                </div>
+                                <input type="text" id="types-actes" name="types-actes" required value="<?= $result['type_actes'] ?>"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
 
                             <div>
                                 <label for="tarif" class="block text-sm font-medium text-gray-700 mb-2">
                                     Tarif par Acte (DH) <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" id="tarif" name="tarif_horaire" min="0" step="50" required value="800"
+                                <input type="number" id="tarif" name="tarif_horaire" min="0" step="50" required value="<?= $result['tarif_horaire'] ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <label for="biographie" class="block text-sm font-medium text-gray-700 mb-2">
-                            Biographie
-                        </label>
-                        <textarea id="biographie" name="biographie" rows="4"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent resize-none">Huissier expérimenté spécialisé en signification et exécution.</textarea>
                     </div>
 
                     <div class="flex items-center justify-end space-x-4 pt-6">
