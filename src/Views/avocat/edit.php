@@ -8,7 +8,7 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/avocat/update" method="POST">
+            <form action="/avocat/edit?id=<?= $_GET['id'] ?? '' ?>" method="POST">
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?? '' ?>">
                 
                 <div class="p-8 space-y-6">
@@ -22,33 +22,9 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Nom <span class="text-red-500">*</span>
+                                    Name <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nom" name="nom" required value="Alami"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                            </div>
-
-                            <div>
-                                <label for="prenom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Prénom <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" id="prenom" name="prenom" required value="Ahmed"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                            </div>
-
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Email <span class="text-red-500">*</span>
-                                </label>
-                                <input type="email" id="email" name="email" required value="ahmed.alami@example.com"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                            </div>
-
-                            <div>
-                                <label for="telephone" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Téléphone <span class="text-red-500">*</span>
-                                </label>
-                                <input type="tel" id="telephone" name="telephone" required value="+212 612345678"
+                                <input type="text" id="nom" name="nom" required value="<?= $name ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
 
@@ -58,12 +34,9 @@
                                 </label>
                                 <select id="ville" name="ville" required 
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
-                                    <option value="Casablanca" selected>Casablanca</option>
-                                    <option value="Rabat">Rabat</option>
-                                    <option value="Marrakech">Marrakech</option>
-                                    <option value="Fès">Fès</option>
-                                    <option value="Tanger">Tanger</option>
-                                    <option value="Agadir">Agadir</option>
+                                    <?php foreach ($cities as $c): ?>
+                                        <option <?= $city === $c['name'] ? 'selected' : ''  ?>><?= $c['name'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
 
@@ -71,7 +44,7 @@
                                 <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">
                                     Années d'Expérience <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" id="experience" name="annees_experience" min="0" required value="15"
+                                <input type="number" id="experience" name="annees_experience" min="0" required value="<?= $anneesExp ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
                         </div>
@@ -87,26 +60,11 @@
                         <div class="space-y-6">
                             <!-- Spécialités -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                                <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
                                     Spécialités <span class="text-red-500">*</span>
                                 </label>
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit pénal" checked
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit pénal</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit civil" checked
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit civil</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" name="specialites[]" value="Droit de la famille" 
-                                            class="w-4 h-4 text-blue-900 rounded focus:ring-blue-900">
-                                        <span class="text-sm text-gray-700">Droit de la famille</span>
-                                    </label>
-                                </div>
+                                <input type="text" id="specialites" name="specialites" required value="<?= $specialites ?>"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
 
                             <!-- Tarif horaire -->
@@ -114,7 +72,7 @@
                                 <label for="tarif" class="block text-sm font-medium text-gray-700 mb-2">
                                     Tarif Horaire (DH) <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" id="tarif" name="tarif_horaire" min="0" step="50" required value="600"
+                                <input type="number" id="tarif" name="tarif_horaire" min="0" step="50" required value="<?= $tarifHoraire ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent">
                             </div>
 
@@ -125,27 +83,18 @@
                                 </label>
                                 <div class="flex items-center space-x-6">
                                     <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="consultation_en_ligne" value="1" checked
+                                        <input type="radio" name="consultation_en_ligne" value="1" <?= $consultationEnLigne == 1 ? 'checked' : '' ?>
                                             class="w-4 h-4 text-blue-900 focus:ring-blue-900">
                                         <span class="text-sm text-gray-700">Oui</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer">
-                                        <input type="radio" name="consultation_en_ligne" value="0"
+                                        <input type="radio" name="consultation_en_ligne" value="0" <?= $consultationEnLigne == 0 ? 'checked' : '' ?>
                                             class="w-4 h-4 text-blue-900 focus:ring-blue-900">
                                         <span class="text-sm text-gray-700">Non</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Biographie -->
-                    <div>
-                        <label for="biographie" class="block text-sm font-medium text-gray-700 mb-2">
-                            Biographie
-                        </label>
-                        <textarea id="biographie" name="biographie" rows="4"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900 focus:border-transparent resize-none">Avocat expérimenté spécialisé en droit pénal et civil avec 15 ans d'expérience.</textarea>
                     </div>
 
                     <!-- Action Buttons -->
