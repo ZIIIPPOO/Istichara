@@ -4,7 +4,7 @@ class Database {
     private $connection;
 
     public $host = "db";
-    public $db_name = "isticharadb";
+    public $db_name = "istichara";
     public $username = "root";
     public $password = "root";
     public static $instance = null;
