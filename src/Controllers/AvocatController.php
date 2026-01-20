@@ -162,7 +162,7 @@ class AvocatController
         }
 
         require_once __DIR__ . '/../Views/layouts/header.php';
-        require_once __DIR__ . '/../Views/professionnel/create.php';
+        require_once __DIR__ . '/../Views/toggle_form/create.php';
         require_once __DIR__ . '/../Views/layouts/footer.php';
     }
 }

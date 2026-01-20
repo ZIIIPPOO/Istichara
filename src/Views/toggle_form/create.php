@@ -8,7 +8,7 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/professionnel/create" method="POST">
+            <form action="/toggle_form/create" method="POST">
                 <div class="p-8 space-y-6">
 
                     <!-- Toggle Avocat / Huissier -->
