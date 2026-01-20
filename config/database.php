@@ -3,10 +3,10 @@ class Database {
 
     private $connection;
 
-    public $host = "localhost";
-    public $db_name = "istichara";
+    public $host = "db";
+    public $db_name = "isticharadb";
     public $username = "root";
-    public $password = "zippo";
+    public $password = "root";
     public static $instance = null;
 
 
