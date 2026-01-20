@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-gray-50">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body class="h-full">
     <div class="min-h-full">
         <!-- Sidebar -->
@@ -20,7 +22,7 @@
                         <span class="text-white text-xl font-bold">ISTICHARA</span>
                     </div>
                 </div>
-                
+
                 <!-- Navigation -->
                 <div class="flex flex-1 flex-col overflow-y-auto">
                     <nav class="flex-1 space-y-1 px-2 py-4">
@@ -28,29 +30,29 @@
                             <i class="fas fa-home text-amber-600 mr-3 text-lg"></i>
                             Accueil
                         </a>
-                        
+
                         <a href="/avocats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-user-tie text-amber-600 mr-3 text-lg"></i>
                             Avocats
                         </a>
-                        
+
                         <a href="/huissiers" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
-                        
+
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
                             Statistiques
                         </a>
-                        
-                        <a href="/recherche" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-                            <i class="fas fa-search text-amber-600 mr-3 text-lg"></i>
-                            Recherche
+
+                        <a href="/professionnel/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                            <i class="fas fa-plus text-amber-600 mr-3"></i>
+                            Nouveau Professionnel
                         </a>
                     </nav>
                 </div>
-                
+
                 <!-- Footer -->
                 <div class="flex flex-shrink-0 bg-blue-950 p-4">
                     <div class="w-full text-center">
@@ -69,7 +71,7 @@
                     <span class="sr-only">Open sidebar</span>
                     <i class="fas fa-bars text-xl"></i>
                 </button>
-                
+
                 <div class="flex flex-1 justify-between px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-1 items-center">
                         <div class="w-full max-w-lg">
@@ -82,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="ml-4 flex items-center md:ml-6">
                         <button type="button" class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
                             <span class="sr-only">View notifications</span>
