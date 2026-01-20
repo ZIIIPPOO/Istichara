@@ -213,16 +213,3 @@
 
     </div>
 </div>
-
-<!-- Script pour Chart.js (optionnel - pour le bonus) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Zone pour le graphique Chart.js (BONUS)
-    // const ctx = document.getElementById('cityChart');
-    // if (ctx) {
-    //     new Chart(ctx, {
-    //         type: 'bar',
-    //         data: { ... }
-    //     });
-    // }
-</script>
