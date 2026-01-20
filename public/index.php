@@ -1,5 +1,5 @@
 <?php
-
+// php -S localhost:8000 -t public
 if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get url
     $uri = trim($uri, '/'); 
