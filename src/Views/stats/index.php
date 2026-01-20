@@ -127,7 +127,6 @@
             <i class="fas fa-trophy text-amber-600 mr-2"></i>
             Top 3 des Avocats par Années d'Expérience
         </h2>
-
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead>
@@ -140,117 +139,78 @@
                         <th class="text-center py-3 px-4 font-semibold text-gray-700">Tarif/h</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <!-- 1er Place -->
-                    <tr class="border-b border-gray-100 bg-amber-50 hover:bg-amber-100">
-                        <td class="py-4 px-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-medal text-amber-500 text-3xl mr-3"></i>
-                                <span class="text-2xl font-bold text-gray-900">1</span>
-                            </div>
-                        </td>
-                        <td class="py-4 px-4">
-                            <div class="flex items-center">
-                                <div>
-                                    <p class="font-bold text-gray-900 text-lg"><?= $topThree[0]['name'] ?></p>
-                                    <p class="text-sm text-gray-500">Avocat</p>
+                    <?php if (isset($topThree[0])): ?>
+                        <!-- 1er Place -->
+                        <tr class="border-b border-gray-100 bg-amber-50 hover:bg-amber-100">
+                            <td class="py-4 px-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-medal text-amber-500 text-3xl mr-3"></i>
+                                    <span class="text-2xl font-bold text-gray-900">1</span>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-4">
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-map-marker-alt text-amber-600 mr-2"></i>
-                                <span class="text-gray-700"><?= $topThree[0]['city'] ?></span>
-                            </span>
-                        </td>
-                        <td class="py-4 px-4">
-                            <span class="badge badge-primary"><?= $topThree[0]['specialites'] ?></span>
-                        </td>
-                        <td class="text-center py-4 px-4">
-                            <span class="inline-flex items-center justify-center px-4 py-2 bg-amber-100 rounded-full">
-                                <i class="fas fa-briefcase text-amber-600 mr-2"></i>
-                                <span class="font-bold text-amber-700 text-lg"><?= $topThree[0]['annees_experience'] ?> ans</span>
-                            </span>
-                        </td>
-                        <td class="text-center py-4 px-4">
-                            <span class="font-semibold text-blue-900 text-lg"><?= number_format($topThree[0]['tarif_horaire']) ?>DH</span>
-                        </td>
-                    </tr>
+                            </td>
 
-                    <!-- 2ème Place -->
-                    <tr class="border-b border-gray-100 bg-gray-50 hover:bg-gray-100">
-                        <td class="py-4 px-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-medal text-gray-400 text-3xl mr-3"></i>
-                                <span class="text-2xl font-bold text-gray-900">2</span>
-                            </div>
-                        </td>
-                        <td class="py-4 px-4">
-                            <div class="flex items-center">
-                                <div>
-                                    <p class="font-bold text-gray-900 text-lg"><?= $topThree[1]['name'] ?></p>
-                                    <p class="text-sm text-gray-500">Avocat</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-4">
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-map-marker-alt text-blue-900 mr-2"></i>
-                                <span class="text-gray-700"><?= $topThree[1]['city'] ?></span>
-                            </span>
-                        </td>
-                        <td class="py-4 px-4">
-                            <span class="badge badge-primary"><?= $topThree[1]['specialites'] ?></span>
-                        </td>
-                        <td class="text-center py-4 px-4">
-                            <span class="inline-flex items-center justify-center px-4 py-2 bg-gray-200 rounded-full">
-                                <i class="fas fa-briefcase text-gray-600 mr-2"></i>
-                                <span class="font-bold text-gray-700 text-lg"><?= $topThree[1]['annees_experience'] ?> ans</span>
-                            </span>
-                        </td>
-                        <td class="text-center py-4 px-4">
-                            <span class="font-semibold text-blue-900 text-lg"><?= number_format($topThree[1]['tarif_horaire']) ?> DH</span>
-                        </td>
-                    </tr>
+                            <td class="py-4 px-4">
+                                <p class="font-bold text-gray-900 text-lg">
+                                    <?= isset($topThree[0]['name']) ? $topThree[0]['name'] : '-' ?>
+                                </p>
+                            </td>
 
-                    <!-- 3ème Place -->
-                    <tr class="border-b border-gray-100 bg-orange-50 hover:bg-orange-100">
-                        <td class="py-4 px-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-medal text-orange-400 text-3xl mr-3"></i>
-                                <span class="text-2xl font-bold text-gray-900">3</span>
-                            </div>
-                        </td>
-                        <td class="py-4 px-4">
-                            <div class="flex items-center">
-                                <div>
-                                    <p class="font-bold text-gray-900 text-lg"><?= $topThree[2]['name'] ?></p>
-                                    <p class="text-sm text-gray-500">Avocat</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-4">
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-map-marker-alt text-orange-600 mr-2"></i>
-                                <span class="text-gray-700"><?= $topThree[2]['city'] ?></span>
-                            </span>
-                        </td>
-                        <td class="py-4 px-4">
-                            <span class="badge badge-primary"><?= $topThree[2]['specialites'] ?></span>
-                        </td>
-                        <td class="text-center py-4 px-4">
-                            <span class="inline-flex items-center justify-center px-4 py-2 bg-orange-100 rounded-full">
-                                <i class="fas fa-briefcase text-orange-600 mr-2"></i>
-                                <span class="font-bold text-orange-700 text-lg"><?= $topThree[2]['annees_experience'] ?> ans</span>
-                            </span>
-                        </td>
-                        <td class="text-center py-4 px-4">
-                            <span class="font-semibold text-blue-900 text-lg"><?= number_format($topThree[2]['tarif_horaire']) ?> DH</span>
-                        </td>
-                    </tr>
+                            <td class="py-4 px-4">
+                                <?= isset($topThree[0]['city']) ? $topThree[0]['city'] : '-' ?>
+                            </td>
+
+                            <td class="py-4 px-4">
+                                <?= isset($topThree[0]['specialites']) ? $topThree[0]['specialites'] : '-' ?>
+                            </td>
+
+                            <td class="text-center py-4 px-4">
+                                <?= isset($topThree[0]['annees_experience']) ? $topThree[0]['annees_experience'] . ' ans' : '-' ?>
+                            </td>
+
+                            <td class="text-center py-4 px-4">
+                                <?= isset($topThree[0]['tarif_horaire']) ? number_format($topThree[0]['tarif_horaire']) . ' DH' : '-' ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+
+                    <?php if (isset($topThree[1])): ?>
+                        <!-- 2ème Place -->
+                        <tr class="border-b border-gray-100 bg-gray-50 hover:bg-gray-100">
+                            <td class="py-4 px-4">2</td>
+                            <td class="py-4 px-4"><?= isset($topThree[1]['name']) ? $topThree[1]['name'] : '-' ?></td>
+                            <td class="py-4 px-4"><?= isset($topThree[1]['city']) ? $topThree[1]['city'] : '-' ?></td>
+                            <td class="py-4 px-4"><?= isset($topThree[1]['specialites']) ? $topThree[1]['specialites'] : '-' ?></td>
+                            <td class="py-4 px-4 text-center">
+                                <?= isset($topThree[1]['annees_experience']) ? $topThree[1]['annees_experience'] . ' ans' : '-' ?>
+                            </td>
+                            <td class="py-4 px-4 text-center">
+                                <?= isset($topThree[1]['tarif_horaire']) ? number_format($topThree[1]['tarif_horaire']) . ' DH' : '-' ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+
+                    <?php if (isset($topThree[2])): ?>
+                        <!-- 3ème Place -->
+                        <tr class="border-b border-gray-100 bg-orange-50 hover:bg-orange-100">
+                            <td class="py-4 px-4">3</td>
+                            <td class="py-4 px-4"><?= isset($topThree[2]['name']) ? $topThree[2]['name'] : '-' ?></td>
+                            <td class="py-4 px-4"><?= isset($topThree[2]['city']) ? $topThree[2]['city'] : '-' ?></td>
+                            <td class="py-4 px-4"><?= isset($topThree[2]['specialites']) ? $topThree[2]['specialites'] : '-' ?></td>
+                            <td class="py-4 px-4 text-center">
+                                <?= isset($topThree[2]['annees_experience']) ? $topThree[2]['annees_experience'] . ' ans' : '-' ?>
+                            </td>
+                            <td class="py-4 px-4 text-center">
+                                <?= isset($topThree[2]['tarif_horaire']) ? number_format($topThree[2]['tarif_horaire']) . ' DH' : '-' ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+
                 </tbody>
             </table>
         </div>
+
     </div>
 </div>
 
