@@ -26,7 +26,7 @@ Router::get('huissier/delete', 'HuissierController', 'delete');
 
 Router::get('stats', 'StatsController', 'index'); 
 
-Router::get('professionnel/create', 'AvocatController', 'createDynamic');
+Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
 
 
