@@ -46,7 +46,7 @@
                             Statistiques
                         </a>
 
-                        <a href="/professionnel/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                        <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-plus text-amber-600 mr-3"></i>
                             Nouveau Professionnel
                         </a>
