@@ -144,10 +144,10 @@
                                 </div>
                             </div>
                             <div class="flex gap-2">
-                                <a href="/reservations/accept?id=1" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
+                                <a href="/admin/professional/accept?id=<?= $professionel['id'] ?>" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
                                     <i class="fas fa-check"></i>
                                 </a>
-                                <a href="/reservations/reject?id=1" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
+                                <a href="/admin/professional/reject?id=1" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>

@@ -26,6 +26,7 @@ Router::get('huissier/delete', 'HuissierController', 'delete');
 
 Router::get('admin/dashboard', 'AdminController', 'index');
 Router::get('admin/tout/demandes', 'AdminController', 'listDemandes');
+Router::get('admin/professional/accept', 'AdminController', 'acceptProfessional');
 
 
 Router::get('stats', 'StatsController', 'index'); 

@@ -71,4 +71,14 @@ class AdminController
         require_once __DIR__ . '/../Views/layouts/footer.php';
     }
 
+    public function acceptProfessional()
+    {
+        require_once __DIR__ . '/../Models/Avocat.php';
+
+        $Avocat = new Avocat();
+        require_once __DIR__ . '/../Models/Huissier.php';
+        $id = $_GET['id'];
+
+    }
+
 }
