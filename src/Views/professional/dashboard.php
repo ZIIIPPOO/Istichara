@@ -105,33 +105,41 @@
                 <h2 class="text-xl font-bold text-gray-900 flex items-center">
                     <i class="fas fa-bell text-amber-600 mr-2"></i>
                     Demandes en Attente
-                    <span class="ml-2 px-2 py-1 bg-amber-500 text-white text-xs rounded-full">8</span>
+                    <span class="ml-2 px-2 py-1 bg-amber-500 text-white text-xs rounded-full"><?= count($professionels) ?></span>
                 </h2>
-                <a href="/reservations" class="text-blue-900 text-sm font-medium hover:underline">Voir tout</a>
+                <a href="/admin/tout/demandes" class="text-blue-900 text-sm font-medium hover:underline">Voir tout</a>
             </div>
 
             <div class="divide-y divide-gray-100">
                 <!-- toutes les demandes -->
-                <?php foreach ($huissiers as $huissier): ?>
+                <?php foreach ($professionels as $professionel): ?>
+                    <?php $color = $colors[array_rand($colors)]; ?>
                     <div class="p-4 hover:bg-gray-50 transition">
                         <div class="flex items-start justify-between">
                             <div class="flex items-start">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-12 h-12 <?= $color ?> rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                                     <span class="text-blue-900 font-semibold">
                                         <?php
-                                        if ($huissier['type'] == 'avocat'):
-                                            echo 'A' . strtoupper($huissier['name'][0]);
+                                        if ($professionel['type'] == 'avocat'):
+                                            echo 'A' . strtoupper($professionel['name'][0]);
                                         else:
-                                            echo 'H' . strtoupper($huissier['name'][0]);
+                                            echo 'H' . strtoupper($professionel['name'][0]);
                                         endif;
                                         ?>
                                     </span>
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-gray-900"><?= $huissier['name'] ?></p>
-                                    <p class="text-sm text-gray-500"><?= $huissier['specialites'] ?></p>
+                                    <p class="font-semibold text-gray-900"><?= $professionel['name'] ?></p>
+                                    <p class="text-sm text-gray-500">
+                                        <?php if ($professionel['type'] == 'avocat'):
+                                            echo $professionel['specialites'];
+                                        else:
+                                            echo $professionel['type_actes'];
+                                        endif;
+                                        ?>
+                                    </p>
                                     <p class="text-xs text-gray-400 mt-1">
-                                        <?= $huissier['type'] ?>
+                                        <?= $professionel['type'] ?>
                                     </p>
                                 </div>
                             </div>
@@ -146,115 +154,10 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-
-                <!-- Demande 1 -->
-                <div class="p-4 hover:bg-gray-50 transition">
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <span class="text-blue-900 font-semibold">SM</span>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-900">Sara Moussaoui</p>
-                                <p class="text-sm text-gray-500">Droit de la famille</p>
-                                <p class="text-xs text-gray-400 mt-1">
-                                    <i class="fas fa-calendar mr-1"></i>25 Jan 2025 • 10:00
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="/reservations/accept?id=1" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="/reservations/reject?id=1" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Demande 2 -->
-                <div class="p-4 hover:bg-gray-50 transition">
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <span class="text-amber-700 font-semibold">KB</span>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-900">Karim Benali</p>
-                                <p class="text-sm text-gray-500">Droit pénal <span class="text-purple-600">• En ligne</span></p>
-                                <p class="text-xs text-gray-400 mt-1">
-                                    <i class="fas fa-calendar mr-1"></i>26 Jan 2025 • 14:30
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="/reservations/accept?id=2" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="/reservations/reject?id=2" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Demande 3 -->
-                <div class="p-4 hover:bg-gray-50 transition">
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <span class="text-green-700 font-semibold">FE</span>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-900">Fatima El Idrissi</p>
-                                <p class="text-sm text-gray-500">Droit des affaires</p>
-                                <p class="text-xs text-gray-400 mt-1">
-                                    <i class="fas fa-calendar mr-1"></i>27 Jan 2025 • 09:00
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="/reservations/accept?id=3" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="/reservations/reject?id=3" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Demande 4 -->
-                <div class="p-4 hover:bg-gray-50 transition">
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                <span class="text-purple-700 font-semibold">YA</span>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-900">Youssef Amrani</p>
-                                <p class="text-sm text-gray-500">Droit immobilier</p>
-                                <p class="text-xs text-gray-400 mt-1">
-                                    <i class="fas fa-calendar mr-1"></i>28 Jan 2025 • 11:00
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="/reservations/accept?id=4" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="/reservations/reject?id=4" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
-
             <!-- Footer -->
             <div class="p-4 bg-gray-50 border-t border-gray-100 text-center">
-                <a href="/reservations" class="text-blue-900 font-medium hover:underline">
+                <a href="/admin/tout/demandes" class="text-blue-900 font-medium hover:underline">
                     Voir toutes les demandes <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             </div>

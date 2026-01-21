@@ -32,9 +32,6 @@ class Huissier extends Person
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['no']);
         $results = $stmt->fetchAll();
-        foreach ($results as $result):
-        $result['type'] = "huissier";
-        endforeach;
         return $results;
     }
 

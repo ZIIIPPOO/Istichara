@@ -40,9 +40,6 @@ JOIN cities ON avocats.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['no']);
         $results = $stmt->fetchAll();
-        foreach ($results as $result):
-        $result['type'] = "avocat";
-        endforeach;
         return $results;
     }
 

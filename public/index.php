@@ -24,7 +24,8 @@ Router::get('huissier/edit', 'HuissierController', 'edit');
 Router::get('huissier/update', 'HuissierController', 'update');
 Router::get('huissier/delete', 'HuissierController', 'delete');
 
-Router::get('admin/dashboard', 'AdminController', 'getAllNonApprouved');
+Router::get('admin/dashboard', 'AdminController', 'index');
+Router::get('admin/tout/demandes', 'AdminController', 'listDemandes');
 
 
 Router::get('stats', 'StatsController', 'index'); 
