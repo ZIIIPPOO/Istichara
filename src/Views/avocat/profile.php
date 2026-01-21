@@ -114,12 +114,14 @@
                     <p class="font-semibold text-blue-900">Document justificatif (PDF)</p>
                     <p class="text-sm text-blue-600">Diplôme / Autorisation</p>
                 </div>
-
-                <a href="/assets/pdf/cv-seydou-bakayoko.pdf" target="_blank"
-                    class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
-                    <i class="fas fa-file-pdf"></i>
-                    Voir PDF
-                </a>
+                <form action="/admin/professional/pdf?type=avocat" method="POST" target="_blank">
+                    <input type="hidden" name="id" value="<?= $avocat['id'] ?>">
+                    <button type="submit"
+                        class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                        <i class="fas fa-file-pdf"></i>
+                        Voir PDF
+                    </button>
+                </form>
             </div>
 
         </div>

@@ -133,13 +133,21 @@ class AdminController
 
     public function showPdf()
     {
+        require_once __DIR__ . '/../Models/Avocat.php';
         require_once __DIR__ . '/../Models/Huissier.php';
+
+        $type = $_GET['type'];
         $id = intval($_POST['id']);
 
-        $Huissier = new Huissier();
-        $huissier = $Huissier->getById($id);
-
-        $file = __DIR__ . '/../../public/assets/pdf/'. $huissier['lienPdf'];
+        if ($type === 'avocat'):
+            $Avocat = new Avocat();
+            $avocat = $Avocat->getById($id);
+            $file = __DIR__ . '/../../public/assets/pdf/' . $avocat['lienPdf'];
+        else:
+            $Huissier = new Huissier();
+            $huissier = $Huissier->getById($id);
+            $file = __DIR__ . '/../../public/assets/pdf/' . $huissier['lienPdf'];
+        endif;
 
         if (!$file) {
             http_response_code(404);
