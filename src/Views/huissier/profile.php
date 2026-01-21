@@ -68,11 +68,9 @@
                     <div>
                         <p class="text-sm text-gray-500 mb-2">Jours disponibles</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Lundi</span>
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Mardi</span>
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Mercredi</span>
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Jeudi</span>
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Vendredi</span>
+                            <?php foreach ($disponibilites as $disponibilite): ?>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm"><?= $disponibilite['jour_semaine'] ?></span>
+                            <?php endforeach; ?>
                         </div>
                     </div>
 
@@ -80,12 +78,15 @@
                     <div>
                         <p class="text-sm text-gray-500 mb-2">Heures disponibles</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">09:00 - 12:00</span>
+                            <?php foreach ($disponibilites as $disponibilite): ?>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"><?= $disponibilite['heure_debut'] ?> - <?= $disponibilite['heure_fin'] ?></span>
+                            <?php endforeach; ?>
                         </div>
                     </div>
 
                 </div>
             </div>
+
 
             <!-- Spécialité / Actes -->
             <div class="bg-gray-50 border-l-4 border-indigo-500 p-4 rounded-lg">

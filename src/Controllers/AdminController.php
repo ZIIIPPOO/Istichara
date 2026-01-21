@@ -113,16 +113,22 @@ class AdminController
         $id = intval($_GET['id']);
         $type = $_GET['type'];
 
+        require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
+
         require_once __DIR__ . '/../Models/Avocat.php';
         require_once __DIR__ . '/../Models/Huissier.php';
 
         require_once __DIR__ . '/../Views/layouts/header.php';
 
         if ($type === 'avocat'):
+            $Disponibilite = new DisponibilitesRepo();
+            $disponibilites = $Disponibilite->getAllDispoAvocat($id);
             $Avocat = new Avocat();
             $avocat = $Avocat->getById($id);
             require_once __DIR__ . '/../Views/avocat/profile.php';
         else:
+            $Disponibilite = new DisponibilitesRepo();
+            $disponibilites = $Disponibilite->getAllDispoHuissier($id);
             $Huissier = new Huissier();
             $huissier = $Huissier->getById($id);
             require_once __DIR__ . '/../Views/huissier/profile.php';

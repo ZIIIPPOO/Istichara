@@ -27,6 +27,26 @@ class DisponibilitesRepo {
         $stmt = $this->db->prepare("SELECT * FROM disponibilites where id = ?");
         return $stmt->execute([$user_id])->fetchAll();
     }
+
+    public function getAllDispoHuissier($user_id)
+    {
+        $stmt = $this->db->prepare("SELECT huissiers.*, cities.name as city, huissiers.name as nom, disponibilites.* FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        INNER JOIN disponibilites on disponibilites.user_id = huissiers.id
+        where huissiers.user_id = ? ");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function getAllDispoAvocat($user_id)
+    {
+        $stmt = $this->db->prepare("SELECT avocats.*, cities.name as city, avocats.name as nom, disponibilites.* FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        INNER JOIN disponibilites on disponibilites.user_id = avocats.id
+        where avocats.user_id = ? ");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll();
+    }
 }
 
 ?>

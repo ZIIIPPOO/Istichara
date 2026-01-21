@@ -1,5 +1,5 @@
 <?php
-class  Disponibilites{
+class  Disponibilites {
     private int $user_id;
     private string $jour_semaine;
     private string $heure_debut;
