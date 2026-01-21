@@ -98,7 +98,7 @@
 
     <!-- Two Columns Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        
+
         <!-- Demandes en Attente -->
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="p-6 border-b border-gray-200 bg-amber-50 flex items-center justify-between">
@@ -111,6 +111,42 @@
             </div>
 
             <div class="divide-y divide-gray-100">
+                <!-- toutes les demandes -->
+                <?php foreach ($huissiers as $huissier): ?>
+                    <div class="p-4 hover:bg-gray-50 transition">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <span class="text-blue-900 font-semibold">
+                                        <?php
+                                        if ($huissier['type'] == 'avocat'):
+                                            echo 'A' . strtoupper($huissier['name'][0]);
+                                        else:
+                                            echo 'H' . strtoupper($huissier['name'][0]);
+                                        endif;
+                                        ?>
+                                    </span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900"><?= $huissier['name'] ?></p>
+                                    <p class="text-sm text-gray-500"><?= $huissier['specialites'] ?></p>
+                                    <p class="text-xs text-gray-400 mt-1">
+                                        <?= $huissier['type'] ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="/reservations/accept?id=1" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
+                                    <i class="fas fa-check"></i>
+                                </a>
+                                <a href="/reservations/reject?id=1" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
                 <!-- Demande 1 -->
                 <div class="p-4 hover:bg-gray-50 transition">
                     <div class="flex items-start justify-between">
@@ -329,7 +365,7 @@
             <i class="fas fa-bolt text-amber-600 mr-2"></i>
             Actions Rapides
         </h2>
-        
+
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a href="/disponibilites" class="flex flex-col items-center p-6 bg-blue-50 rounded-xl hover:bg-blue-100 transition group">
                 <div class="w-14 h-14 bg-blue-900 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
@@ -337,21 +373,21 @@
                 </div>
                 <span class="text-gray-900 font-medium text-center text-sm">Gérer mes disponibilités</span>
             </a>
-            
+
             <a href="/reservations" class="flex flex-col items-center p-6 bg-amber-50 rounded-xl hover:bg-amber-100 transition group">
                 <div class="w-14 h-14 bg-amber-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                     <i class="fas fa-inbox text-white text-xl"></i>
                 </div>
                 <span class="text-gray-900 font-medium text-center text-sm">Voir les demandes</span>
             </a>
-            
+
             <a href="/profile/edit" class="flex flex-col items-center p-6 bg-green-50 rounded-xl hover:bg-green-100 transition group">
                 <div class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                     <i class="fas fa-user-edit text-white text-xl"></i>
                 </div>
                 <span class="text-gray-900 font-medium text-center text-sm">Modifier mon profil</span>
             </a>
-            
+
             <a href="/consultations/history" class="flex flex-col items-center p-6 bg-purple-50 rounded-xl hover:bg-purple-100 transition group">
                 <div class="w-14 h-14 bg-purple-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                     <i class="fas fa-history text-white text-xl"></i>

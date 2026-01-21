@@ -39,7 +39,11 @@ JOIN cities ON avocats.city_id = cities.id";
         where avocats.asigned = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['no']);
-        return $stmt->fetchAll();
+        $results = $stmt->fetchAll();
+        foreach ($results as $result):
+        $result['type'] = "avocat";
+        endforeach;
+        return $results;
     }
 
     public function getById($id)

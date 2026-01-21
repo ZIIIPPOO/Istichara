@@ -31,7 +31,11 @@ class Huissier extends Person
         where huissiers.asigned = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['no']);
-        return $stmt->fetchAll();
+        $results = $stmt->fetchAll();
+        foreach ($results as $result):
+        $result['type'] = "huissier";
+        endforeach;
+        return $results;
     }
 
     public function getById($id)
