@@ -32,7 +32,7 @@ Router::get('stats', 'StatsController', 'index');
 Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
 Router::get('emploi', 'ProfessionnelController', 'AjouteEmploi');
-
+Router::get('emploi/edit', 'ProfessionnelController', 'editEmploi');
 
 Router::dispatch();
 
