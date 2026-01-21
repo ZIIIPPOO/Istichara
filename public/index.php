@@ -1,4 +1,5 @@
 <?php
+
 // php -S localhost:8000 -t public
 if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get url
@@ -28,7 +29,11 @@ Router::get('stats', 'StatsController', 'index');
 
 Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
-
+Router::get('reservations', 'ReservationController', 'index');
+Router::get('reservations/create', 'ReservationController', 'create');
+Router::get('reservations/accept', 'ReservationController', 'accept');
+Router::get('reservations/reject', 'ReservationController', 'reject');
+Router::get('reservations/delete', 'ReservationController', 'delete');
 
 
 Router::dispatch();
