@@ -115,17 +115,17 @@ class AdminController
 
         require_once __DIR__ . '/../Models/Avocat.php';
         require_once __DIR__ . '/../Models/Huissier.php';
-      
+
         require_once __DIR__ . '/../Views/layouts/header.php';
 
         if ($type === 'avocat'):
-        $Avocat = new Avocat();
-        $avocat = $Avocat->getById($id);
-        require_once __DIR__ . '/../Views/avocat/profile.php';
+            $Avocat = new Avocat();
+            $avocat = $Avocat->getById($id);
+            require_once __DIR__ . '/../Views/avocat/profile.php';
         else:
-        $Huissier = new Huissier();
-        $huissier = $Huissier->getById($id);
-        require_once __DIR__ . '/../Views/huissier/profile.php';
+            $Huissier = new Huissier();
+            $huissier = $Huissier->getById($id);
+            require_once __DIR__ . '/../Views/huissier/profile.php';
         endif;
 
         require_once __DIR__ . '/../Views/layouts/footer.php';
@@ -133,17 +133,21 @@ class AdminController
 
     public function showPdf()
     {
-    $file = __DIR__ . "/../public/assets/public/assets/pdf/cv-seydou-bakayoko.pdf";
+        require_once __DIR__ . '/../Models/Huissier.php';
+        $id = intval($_POST['id']);
 
-    if (!file_exists($file)) {
-        echo "PDF not found";
-    }
+        $Huissier = new Huissier();
+        $huissier = $Huissier->getById($id);
 
-    header("Content-Type: application/pdf");
-    header("Content-Disposition: inline; filename=\"cv-seydou-bakayoko.pdf\"");
-    header("Content-Length: " . filesize($file));
+        $file = __DIR__ . '/../../public/assets/pdf/'. $huissier['lienPdf'];
 
-    readfile($file);
-    exit;
+        if (!$file) {
+            http_response_code(404);
+            echo "pdf non trouver";
+        }
+
+        header('Content-Type: application/pdf');
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
     }
 }
