@@ -133,6 +133,17 @@ class AdminController
 
     public function showPdf()
     {
-        require_once __DIR__ . '/../public/assets/public/assets/pdf/cv-seydou-bakayoko.pdf';
+    $file = __DIR__ . "/../public/assets/public/assets/pdf/cv-seydou-bakayoko.pdf";
+
+    if (!file_exists($file)) {
+        echo "PDF not found";
+    }
+
+    header("Content-Type: application/pdf");
+    header("Content-Disposition: inline; filename=\"cv-seydou-bakayoko.pdf\"");
+    header("Content-Length: " . filesize($file));
+
+    readfile($file);
+    exit;
     }
 }
