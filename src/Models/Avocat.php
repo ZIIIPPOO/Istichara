@@ -31,6 +31,15 @@ JOIN cities ON avocats.city_id = cities.id";
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function getAllByStatus()
+    {
+        $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        where avocats.asigned = 'no'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     public function getById($id)
     {
