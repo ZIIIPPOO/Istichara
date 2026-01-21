@@ -67,7 +67,7 @@
 
                     <!-- Actions -->
                     <div class="flex gap-4 mt-6">
-                        <a href="/admin/professional/accept?id=<?= $professionel['id'] ?>" class="flex-1">
+                        <a href="/admin/professional/accept?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="flex-1">
                             <button class="w-full bg-gradient-to-r from-green-400 to-emerald-500 
                        text-white px-5 py-2.5 rounded-xl font-semibold 
                        hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">
@@ -76,7 +76,7 @@
                             </button>
                         </a>
 
-                        <a href="/admin/professional/reject?id=<?= $professionel['id'] ?>" class="flex-1">
+                        <a href="/admin/professional/reject?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="flex-1">
                             <button class="w-full bg-gradient-to-r from-pink-400 to-red-500 
                        text-white px-5 py-2.5 rounded-xl font-semibold 
                        hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">

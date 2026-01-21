@@ -113,6 +113,12 @@
             <div class="divide-y divide-gray-100">
                 <!-- toutes les demandes -->
                 <?php foreach ($professionels as $professionel): ?>
+                    <?php 
+                        $count++; 
+                        if($count == 6):
+                            break;
+                        endif;
+                    ?>
                     <?php $color = $colors[array_rand($colors)]; ?>
                     <div class="p-4 hover:bg-gray-50 transition">
                         <div class="flex items-start justify-between">
@@ -144,10 +150,10 @@
                                 </div>
                             </div>
                             <div class="flex gap-2">
-                                <a href="/admin/professional/accept?id=<?= $professionel['id'] ?>" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
+                                <a href="/admin/professional/accept?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
                                     <i class="fas fa-check"></i>
                                 </a>
-                                <a href="/admin/professional/reject?id=1" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
+                                <a href="/admin/professional/reject?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>

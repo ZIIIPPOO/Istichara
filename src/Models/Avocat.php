@@ -38,7 +38,7 @@ JOIN cities ON avocats.city_id = cities.id";
         JOIN cities ON avocats.city_id = cities.id
         where avocats.asigned = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['no']);
+        $stmt->execute(['pending']);
         $results = $stmt->fetchAll();
         return $results;
     }
@@ -62,11 +62,11 @@ JOIN cities ON avocats.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$this->name, $this->cityId, $this->specialites, $this->anneesExperience, $this->tarifHoraire, $this->consultationEnLigne, $this->id]);
     }
-    public function updateStausById($id)
+    public function updateStausById(int $id, string $status)
     {
         $sql = "UPDATE avocats SET asigned =? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute(['yes', $id]);
+        return $stmt->execute([$status, $id]);
     }
     public function delete($id)
     {

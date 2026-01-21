@@ -30,7 +30,7 @@ class Huissier extends Person
         JOIN cities ON huissiers.city_id = cities.id
         where huissiers.asigned = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['no']);
+        $stmt->execute(['pending']);
         $results = $stmt->fetchAll();
         return $results;
     }
@@ -57,6 +57,13 @@ class Huissier extends Person
         $sql = "UPDATE huissiers SET name = ?, city_id = ?, type_actes = ?, annees_experience = ?, tarif_horaire = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$this->name, $this->cityId, $this->typeActes, $this->anneesExperience, $this->tarifHoraire, $this->id]);
+    }
+
+    public function updateStausById(int $id, string $status)
+    {
+        $sql = "UPDATE huissiers SET asigned =? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$status, $id]);
     }
 
     public function delete($id)
