@@ -18,9 +18,19 @@ class Huissier extends Person
     public function getAll()
     {
         $sql = "SELECT huissiers.*, cities.name as city, huissiers.name as nom FROM huissiers
-JOIN cities ON huissiers.city_id = cities.id";
+        JOIN cities ON huissiers.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getAllByStatus()
+    {
+        $sql = "SELECT huissiers.*, cities.name as city, huissiers.name as nom FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        where huissiers.asigned = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['no']);
         return $stmt->fetchAll();
     }
 
