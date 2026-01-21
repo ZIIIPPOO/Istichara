@@ -40,6 +40,11 @@
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
+                        <a href="/emploi"
+                            class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                            <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
+                            Professionnel – Emploi du temps
+                        </a>
 
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>

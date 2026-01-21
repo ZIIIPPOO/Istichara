@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // php -S localhost:8000 -t public
 if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get url
@@ -35,7 +38,7 @@ Router::get('stats', 'StatsController', 'index');
 
 Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
-
+Router::get('emploi', 'ProfessionnelController', 'AjouteEmploi');
 
 
 

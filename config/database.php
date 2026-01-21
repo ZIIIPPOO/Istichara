@@ -15,7 +15,6 @@ class Database
     // public $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 
-
     private function __construct()
     {
         $this->connection = new PDO(
