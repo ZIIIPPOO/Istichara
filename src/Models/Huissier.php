@@ -37,7 +37,9 @@ class Huissier extends Person
 
     public function getById($id)
     {
-        $sql = "SELECT * FROM huissiers WHERE id = ?";
+        $sql = "SELECT huissiers.*, cities.name as city, huissiers.name as nom FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        where huissiers.id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch();

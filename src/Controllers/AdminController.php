@@ -107,4 +107,32 @@ class AdminController
         endif;
         header('location: /admin/dashboard');
     }
+
+    public function showProfile()
+    {
+        $id = intval($_GET['id']);
+        $type = $_GET['type'];
+
+        require_once __DIR__ . '/../Models/Avocat.php';
+        require_once __DIR__ . '/../Models/Huissier.php';
+      
+        require_once __DIR__ . '/../Views/layouts/header.php';
+
+        if ($type === 'avocat'):
+        $Avocat = new Avocat();
+        $avocat = $Avocat->getById($id);
+        require_once __DIR__ . '/../Views/avocat/profile.php';
+        else:
+        $Huissier = new Huissier();
+        $huissier = $Huissier->getById($id);
+        require_once __DIR__ . '/../Views/huissier/profile.php';
+        endif;
+
+        require_once __DIR__ . '/../Views/layouts/footer.php';
+    }
+
+    public function showPdf()
+    {
+        require_once __DIR__ . '/../public/assets/public/assets/pdf/cv-seydou-bakayoko.pdf';
+    }
 }

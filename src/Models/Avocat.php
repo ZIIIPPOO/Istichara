@@ -43,9 +43,11 @@ JOIN cities ON avocats.city_id = cities.id";
         return $results;
     }
 
-    public function getById($id)
+    public function getById(int $id)
     {
-        $sql = "SELECT * FROM avocats WHERE id = ?";
+        $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        where avocats.id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch();

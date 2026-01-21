@@ -64,28 +64,31 @@
                         <div class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-indigo-500"></i><?= $professionel['city'] ?></div>
                         <div class="flex items-center gap-2"><i class="fas fa-envelope text-indigo-500"></i><?= $professionel['email'] ?></div>
                     </div>
-
+                    <!-- Voir profil -->
+                    <a href="/admin/professional/profile?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="flex-1">
+                        <button class="w-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-5 py-2.5 mt-4 rounded-xl font-semibold hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fas fa-user"></i>
+                            Voir profil
+                        </button>
+                    </a>
                     <!-- Actions -->
-                    <div class="flex gap-4 mt-6">
+                    <div class="flex gap-3 mt-6">
+                        <!-- Accepter -->
                         <a href="/admin/professional/accept?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="flex-1">
-                            <button class="w-full bg-gradient-to-r from-green-400 to-emerald-500 
-                       text-white px-5 py-2.5 rounded-xl font-semibold 
-                       hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <button class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white px-5 py-2.5 rounded-xl font-semibold hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">
                                 <i class="fas fa-check"></i>
                                 Accepter
                             </button>
                         </a>
 
+                        <!-- Refuser -->
                         <a href="/admin/professional/reject?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="flex-1">
-                            <button class="w-full bg-gradient-to-r from-pink-400 to-red-500 
-                       text-white px-5 py-2.5 rounded-xl font-semibold 
-                       hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <button class="w-full bg-gradient-to-r from-pink-400 to-red-500 text-white px-5 py-2.5 rounded-xl font-semibold hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2">
                                 <i class="fas fa-times"></i>
                                 Refuser
                             </button>
                         </a>
                     </div>
-
                 </div>
             <?php endforeach; ?>
         </div>

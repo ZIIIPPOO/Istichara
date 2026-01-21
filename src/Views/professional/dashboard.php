@@ -113,11 +113,11 @@
             <div class="divide-y divide-gray-100">
                 <!-- toutes les demandes -->
                 <?php foreach ($professionels as $professionel): ?>
-                    <?php 
-                        $count++; 
-                        if($count == 6):
-                            break;
-                        endif;
+                    <?php
+                    $count++;
+                    if ($count == 6):
+                        break;
+                    endif;
                     ?>
                     <?php $color = $colors[array_rand($colors)]; ?>
                     <div class="p-4 hover:bg-gray-50 transition">
@@ -150,10 +150,25 @@
                                 </div>
                             </div>
                             <div class="flex gap-2">
-                                <a href="/admin/professional/accept?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition" title="Accepter">
+
+                                <!-- Voir profil -->
+                                <a href="/admin/professional/profile?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>"
+                                    class="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
+                                    title="Voir profil">
+                                    <i class="fas fa-user"></i>
+                                </a>
+
+                                <!-- Accepter -->
+                                <a href="/admin/professional/accept?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>"
+                                    class="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition"
+                                    title="Accepter">
                                     <i class="fas fa-check"></i>
                                 </a>
-                                <a href="/admin/professional/reject?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>" class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition" title="Refuser">
+
+                                <!-- Refuser -->
+                                <a href="/admin/professional/reject?type=<?= $professionel['type'] ?>&id=<?= $professionel['id'] ?>"
+                                    class="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
+                                    title="Refuser">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>

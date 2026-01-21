@@ -28,6 +28,8 @@ Router::get('admin/dashboard', 'AdminController', 'index');
 Router::get('admin/tout/demandes', 'AdminController', 'listDemandes');
 Router::get('admin/professional/accept', 'AdminController', 'acceptProfessional');
 Router::get('admin/professional/reject', 'AdminController', 'rejectProfessional');
+Router::get('admin/professional/profile', 'AdminController', 'showProfile');
+Router::get('admin/professional/pdf', 'AdminController', 'showPdf');
 
 Router::get('stats', 'StatsController', 'index'); 
 
