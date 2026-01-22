@@ -5,21 +5,22 @@ class ReservationController
     public function index()
     {
         require_once __DIR__ . '/../Models/Reservation.php';
-
-        // $reservation = new Reservation();
-        // if($_SESSION['role'] === 'huissier' || $_SESSION['role'] === 'avocat')
-        // {
-        // $reservations = $reservation->getByProId($_SESSION['user_id']);
+        $reservation = new Reservation();
+        // if($_SESSION['role'] === 'client') {
+        //     // Client sees their own reservations
+            $reservations = $reservation->getByClientId(1);
+            require_once __DIR__ . '/../Views/layouts/header.php';
+            require_once __DIR__ . '/../Views/reservations/client_index.php';
+            require_once __DIR__ . '/../Views/layouts/footer.php';
+        // } 
+        // else if($_SESSION['role'] === 'avocat' || $_SESSION['role'] === 'huissier') {
+        //     // Professional sees their reservation requests
+            // $reservations = $reservation->getByProId(4);
+            // require_once __DIR__ . '/../Views/layouts/header.php';
+            // require_once __DIR__ . '/../Views/reservations/index.php';
+            // require_once __DIR__ . '/../Views/layouts/footer.php';
         // }
-        // else if($_SESSION['role'] === 'client')
-        // {
-        //     $reservations = $reservation->getByClientId($_SESSION['user_id']);
-        // }
-        $reservations = [];
 
-        require_once __DIR__ . '/../Views/layouts/header.php';
-        require_once __DIR__ . '/../Views/reservations/index.php';
-        require_once __DIR__ . '/../Views/layouts/footer.php';
     }
     public function create()
     {

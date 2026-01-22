@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../../config/database.php';
+
 class Reservation
 {
     private $db;
@@ -132,17 +134,42 @@ VALUES (?, ?, ?, ? , ?, ?, ?, ?)";
 
     public function getByProId($professional_id)
     {
-        $sql = "SELECT * FROM reservations WHERE professional_id = ?";
+        $sql = "SELECT r.*, a.name as avocat_name, h.name as huissier_name
+            FROM reservations r
+            LEFT JOIN avocats a ON r.professional_id = a.id
+            LEFT JOIN huissiers h ON r.professional_id = h.id
+            WHERE r.professional_id = ?";
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$professional_id]);
-        return $stmt->fetchAll();
+        $results = $stmt->fetchAll();
+
+
+        foreach ($results as &$row) {
+            $row['name'] = $row['avocat_name'] ?: $row['huissier_name'];
+        }
+
+        return $results;
     }
+
     public function getByClientId($client_id)
     {
-        $sql = "SELECT * FROM reservations WHERE client_id = ?";
+
+        $sql = "SELECT r.*, a.name as avocat_name, h.name as huissier_name
+            FROM reservations r
+            LEFT JOIN avocats a ON r.professional_id = a.id
+            LEFT JOIN huissiers h ON r.professional_id = h.id
+            WHERE r.client_id = ?";
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$client_id]);
-        return $stmt->fetchAll();
+        $results = $stmt->fetchAll();
+
+        foreach ($results as &$row) {
+            $row['name'] = $row['avocat_name'] ?: $row['huissier_name'];
+        }
+
+        return $results;
     }
     public function updateStatus($id, $status)
     {

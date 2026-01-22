@@ -54,10 +54,6 @@
                             <i class="fas fa-calendar-check text-amber-600 mr-3 text-lg"></i>
                             Réservations
                         </a>
-                        <a href="/reservations/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-                            <i class="fas fa-calendar-plus text-amber-600 mr-3 text-lg"></i>
-                            Nouvelle Réservation
-                        </a>
                     </nav>
                 </div>
 
