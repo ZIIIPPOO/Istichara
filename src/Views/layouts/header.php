@@ -102,7 +102,7 @@
                     <div class="ml-4 flex items-center md:ml-6">
                         <button type="button" class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
                             <span class="sr-only">View notifications</span>
-                            <i class="fas fa-bell text-xl"></i>
+                            <i class="fas fa-bell text-xl" id="notification"></i>
                         </button>
 
                         <div class="relative ml-3">
@@ -137,6 +137,15 @@
                     </div>
                 </div>
             </div>
-
+<!-- <script>
+    function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("notification").innerHTML = this.responseText;
+    }
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}loadDoc();
+</script> -->
             <!-- Page content -->
             <main class="flex-1">
