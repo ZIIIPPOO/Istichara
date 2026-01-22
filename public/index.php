@@ -17,6 +17,10 @@ Router::get('avocat/edit', 'AvocatController', 'edit');
 Router::get('avocat/update', 'AvocatController', 'update');    
 Router::get('avocat/delete', 'AvocatController', 'delete');    
 
+Router::get('update/user', 'UserController', 'edit');    
+Router::get('store/user', 'UserController', 'update');    
+
+Router::get('profs/stats', 'DashboardController', 'index'); 
 
 Router::get('huissiers', 'HuissierController', 'index');
 Router::get('huissier/create', 'HuissierController', 'create');
