@@ -95,6 +95,10 @@
                             </div>
                         </div>
                     </div>
+                    <a href="/client/reservation" class="btn-action btn-primary">
+                        <!-- <i class="fas fa-plus"></i> -->
+                        prof stats
+                    </a>
                     <a href="profs/stats?tarif=100&type=avocat&id=2" class="btn-action btn-primary">
                         <!-- <i class="fas fa-plus"></i> -->
                         prof stats
@@ -137,7 +141,7 @@
                     </div>
                 </div>
             </div>
-<!-- <script>
+            <!-- <script>
     function loadDoc() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {

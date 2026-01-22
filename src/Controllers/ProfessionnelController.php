@@ -11,8 +11,8 @@ class ProfessionnelController
 
             $user_id = isset($_POST['user_id']);
             $jour_semaine = isset($_POST['jour_semaine']);
-            $heure_debut = (int)$_POST['heure_debut'];
-            $heure_fin = (int)$_POST['heure_fin'];
+            $heure_debut = (int) date('H', strtotime($_POST['heure_debut']));
+            $heure_fin   = (int) date('H', strtotime($_POST['heure_fin']));
             $Active = (bool)$_POST['is_active'];
             if ($heure_debut < $heure_fin) {
                 $disponibl = new Disponibilites(
