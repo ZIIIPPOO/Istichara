@@ -40,7 +40,7 @@ class User
         return $this->role;
     }
 
-    
+
 
     public function getFullName(): string
     {
@@ -92,7 +92,7 @@ class User
         $this->role = $role;
         return $this;
     }
- 
+
 
     public function setFullName(string $fullname): self
     {
@@ -143,10 +143,31 @@ class User
         $stmt->execute([$id]);
         return   $stmt->fetch();
     }
+    public static function getUpdate(): bool
+    {
+
+        $db = Database::getInstance()->getConnection();
+        $id = $_POST["id"];
+
+        $s = "";
+
+    
+
+        foreach ($_POST as $key => $value) {
+            $s .= "`$key`='$value', ";
+        }
+        $s = rtrim($s, ", ");
+
+        $sql = "UPDATE `users` SET $s WHERE id = ?";
+        
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        return   $stmt->fetch();
+    }
 
     public static function userInstence(array $obj)
     {
-        $user = new User();
+        $user = new self();
         $user->setId($obj["id"])
             ->setEmail($obj["email"])
             ->setFullName($obj["fullname"])

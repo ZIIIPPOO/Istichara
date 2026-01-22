@@ -19,14 +19,15 @@ class UserController
     }
     public function update()
     {
-        $id = $_GET["user"];
-        $object = User::getById($id);
-        // var_dump($object);
-        $user = User::userInstence($object);
-        var_dump($user->getTelephone());
+        // $id = $_POST["id"];
 
-        require_once __DIR__ . '/../Views/layouts/header.php';
-        require_once __DIR__ . '/../Views/update/updateuser.php';
-        require_once __DIR__ . '/../Views/layouts/footer.php';
+        // var_dump($_POST);
+
+        // $object = User::getById($id);
+        // var_dump($object);
+        $user = User::getUpdate();
+        // var_dump($user->getTelephone());
+
+       header("location: /");
     }
 }

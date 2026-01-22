@@ -11,7 +11,7 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/store/update" method="POST">
+            <form action="/store/user" method="POST">
                 <div class="p-8 space-y-6">
 
                     <!-- Hidden ID -->
@@ -31,12 +31,12 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">
                                     Full Name
                                 </label>
-                                <input type="text" name="nom"
+                                <input type="text" name="fullname"
                                     value="<?= htmlspecialchars($user->getFullName()) ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
 
-                         
+
                             <!-- Email -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -53,7 +53,7 @@
                                     Téléphone
                                 </label>
                                 <input type="text" name="telephone"
-                                    value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : is_null($user->getTelephone())) ?>"
+                                    value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : $user->getTelephone()) ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
 
@@ -117,16 +117,17 @@
 
 
                             <!-- Role -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Rôle
-                                </label>
-                                <select name="role" disabled
+                            <!-- <div> -->
+                                <!-- <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Rôle -->
+                                <!-- </label>
+                                <input readonly type="text" name="role" value=" < ?= $user->getRole() ?>"> -->
+                                <!-- <select name="role" readonly
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                                    <option value="ADMIN" <?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
-                                    <option value="USER" <?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
-                                </select>
-                            </div>
+                                    <option value="admin" < ?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
+                                    <option value="user" < ?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
+                                </select> -->
+                            <!-- </div> -->
 
                         </div>
                     </div>
@@ -163,7 +164,7 @@
 
                     <!-- Action Buttons -->
                     <div class="flex items-center justify-end space-x-4 pt-6">
-                        <a href="/users" class="btn-action btn-secondary">
+                        <a href="/avocat/profile" class="btn-action btn-secondary">
                             <i class="fas fa-times"></i>
                             Annuler
                         </a>
@@ -199,7 +200,7 @@
         const form = document.querySelector('form');
 
         function validatePasswords() {
-            
+
             if (password.value === '' && repassword.value === '') {
                 errorMsg.classList.add('hidden');
                 return true;

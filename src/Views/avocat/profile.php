@@ -167,7 +167,7 @@
         
     </div>
     <?php elseif($_SESSION['user']['role']==='avocat'): ?>
-       <a href="/update/user/accept?type=avocat&user=<?= $avocat['id'] ?>">
+       <a href="/update/user?user=<?= $avocat['id'] ?>">
            <button class="px-6 py-3  mt-5 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition flex items-center gap-2">
                Edite Profile
            </button>

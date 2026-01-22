@@ -32,7 +32,7 @@ class AvocatController
 
         $Avocat = new Avocat();
         $avocat = $Avocat->profile($id);
-        
+
         require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
 
         $Disponibilite = new DisponibilitesRepo();
