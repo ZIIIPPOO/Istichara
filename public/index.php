@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 session_start();
 
 $_SESSION["user"] = [
-    "id" => 6,
+    "id" => 2,
     "name" => "hamza",
     "email"=> "hamza@gmail.com",
     "user_id" => 2,
-    "role" => "huissier",
+    "role" => "admin",
 ];
 
 // php -S localhost:8000 -t public
