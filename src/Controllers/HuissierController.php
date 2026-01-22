@@ -2,6 +2,26 @@
 
 class HuissierController
 {
+
+    public function profile()
+    {
+        require_once __DIR__ . '/../Models/Huissier.php';
+
+        $id = $_SESSION['user']['id'];
+
+        $Huisier = new Huissier();
+        $huissier = $Huisier->profile($id);
+        
+        require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
+
+        $Disponibilite = new DisponibilitesRepo();
+        $disponibilites = $Disponibilite->getAllDispoHuissier($id);
+
+        require_once __DIR__ . '/../Views/layouts/header.php';
+        require_once __DIR__ . '/../Views/huissier/profile.php';
+        require_once __DIR__ . '/../Views/layouts/footer.php';
+    }
+
     public function index()
     {
         require_once __DIR__ . '/../Models/Huissier.php';
