@@ -10,7 +10,7 @@ if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
 require_once __DIR__.'/../src/Helpers/Router.php';
 
 
-Router::get('', 'AvocatController', 'index');
+Router::get('', 'UserController', 'showRegisterForm');
 
 Router::get('avocats', 'AvocatController', 'index');           
 Router::get('avocat/create', 'AvocatController', 'create');    
@@ -33,8 +33,12 @@ Router::get('reservations', 'ReservationController', 'index');
 Router::get('reservations/create', 'ReservationController', 'create');
 Router::get('reservations/accept', 'ReservationController', 'accept');
 Router::get('reservations/reject', 'ReservationController', 'reject');
-Router::get('reservations/delete', 'ReservationController', 'delete');
-
+Router::get('reservations/delete', 'ReservationController', 'delete');Router::get('User/signup', 'UserController', 'signUp');
+Router::get('User/signin', 'UserController', 'signIn');
+Router::get('User/verification', 'UserController', 'emailVerification');
+Router::get('verificationform', 'UserController', 'showconfirm');
+Router::get('showformpro', 'UserController', 'showformpro');
+Router::get('showconn', 'UserController', 'showconn');
 
 Router::dispatch();
 
