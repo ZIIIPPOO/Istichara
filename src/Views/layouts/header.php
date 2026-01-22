@@ -101,7 +101,9 @@
                                 <button type="button" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
                                     <span class="sr-only">Open user menu</span>
                                     <div class="h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
-                                        <span class="text-white font-semibold">AD</span>
+                                        <a href="/admin/dashboard">
+                                            <span class="text-white font-semibold">AD</span>
+                                        </a>
                                     </div>
                                 </button>
                                 <div class="ml-3 hidden md:block">
