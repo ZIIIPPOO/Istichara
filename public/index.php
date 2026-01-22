@@ -2,28 +2,39 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+session_start();
+
+$_SESSION["user"] = [
+    "id" => 2,
+    "name" => "hamza",
+    "email"=> "hamza@gmail.com",
+    "user_id" => 2,
+    "role" => "admin",
+];
+
 // php -S localhost:8000 -t public
 if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get url
-    $uri = trim($uri, '/'); 
+    $uri = trim($uri, '/');
     $_GET['url'] = $uri;
 }
 
-require_once __DIR__.'/../src/Helpers/Router.php';
+require_once __DIR__ . '/../src/Helpers/Router.php';
 
 
 Router::get('', 'AvocatController', 'index');
 
-Router::get('avocats', 'AvocatController', 'index');           
-Router::get('avocat/create', 'AvocatController', 'create');    
-Router::get('avocat/edit', 'AvocatController', 'edit');        
-Router::get('avocat/update', 'AvocatController', 'update');    
-Router::get('avocat/delete', 'AvocatController', 'delete');    
+Router::get('avocats', 'AvocatController', 'index');
+Router::get('avocat/create', 'AvocatController', 'create');
+Router::get('avocat/edit', 'AvocatController', 'edit');
+Router::get('avocat/update', 'AvocatController', 'update');
+Router::get('avocat/delete', 'AvocatController', 'delete');
 
-Router::get('update/user', 'UserController', 'edit');    
-Router::get('store/user', 'UserController', 'update');    
+Router::get('update/user', 'UserController', 'edit');
+Router::get('store/user', 'UserController', 'update');
 
-Router::get('profs/stats', 'DashboardController', 'index'); 
+Router::get('profs/stats', 'DashboardController', 'index');
 
 Router::get('huissiers', 'HuissierController', 'index');
 Router::get('huissier/create', 'HuissierController', 'create');
@@ -38,7 +49,7 @@ Router::get('admin/professional/reject', 'AdminController', 'rejectProfessional'
 Router::get('admin/professional/profile', 'AdminController', 'showProfile');
 Router::get('admin/professional/pdf', 'AdminController', 'showPdf');
 
-Router::get('stats', 'StatsController', 'index'); 
+Router::get('stats', 'StatsController', 'index');
 
 Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
@@ -48,5 +59,3 @@ Router::get('emploi/edit', 'ProfessionnelController', 'editEmploi');
 
 
 Router::dispatch();
-
-?>
