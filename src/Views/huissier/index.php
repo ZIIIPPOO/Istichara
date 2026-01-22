@@ -44,6 +44,11 @@
                             <td class="font-semibold text-blue-900"><?= number_format($huissier['tarif_horaire']) ?> DH</td>
                             <td>
                                 <div class="flex gap-2">
+                                    <a href="/admin/professional/profile?type=huissier&id=<?= $huissier['id'] ?>" class="flex-1">
+                                        <button class="w-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-5 py-2.5 mt-4 rounded-xl font-semibold hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2" title="Voir profil">
+                                            <i class="fas fa-user"></i>
+                                        </button>
+                                    </a>
                                     <a href="/huissier/edit?id=<?= $huissier['id'] ?>" class="text-blue-600 hover:text-blue-800">
                                         <i class="fas fa-edit"></i>
                                     </a>

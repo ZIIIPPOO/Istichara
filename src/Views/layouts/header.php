@@ -40,6 +40,11 @@
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
+                        <a href="/emploi"
+                            class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                            <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
+                            Professionnel – Emploi du temps
+                        </a>
 
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
@@ -99,21 +104,23 @@
                                 <?php
                                 if (isset($_SESSION["user"])) { ?>
 
-                                    <a style="cursor: pointer;" href="/update/user?user=<?= isset($_SESSION["user"]) ? $_SESSION["user"] : "1"  ?>" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
+                                    <a style="cursor: pointer;" href="/update/user?user=<?= isset($_SESSION["user"]) ? $_SESSION["user"]["id"] : "1"  ?>" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
                                         <span class="sr-only">Open user menu</span>
                                         <div class="h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
-                                            <span class="text-white font-semibold">AD</span>
+                                            <a href="/<?= $_SESSION["user"]["role"] ?>/dashboard">
+                                                <span class="text-white font-semibold">AD</span>
+                                            </a>
                                         </div>
                                     </a>
 
                                     <div class="ml-3 hidden md:block">
-                                        <p class="text-sm font-medium text-gray-700"> <?= $_SESSION["user"]->getName() ?> </p>
-                                        <p class="text-xs text-gray-500"> <?= $_SESSION["user"]->getEmail() ?> </p>
+                                        <p class="text-sm font-medium text-gray-700"> <?= $_SESSION["user"]["name"] ?> </p>
+                                        <p class="text-xs text-gray-500"> <?= $_SESSION["user"]["email"] ?> </p>
                                     </div>
                                 <?php } else { ?>
                                     <a href="#" class="btn-action btn-primary">
                                         <!-- <i class="fas fa-plus"></i> -->
-                                        LOg in
+                                        Log in
                                     </a>
 
                                 <?php } ?>

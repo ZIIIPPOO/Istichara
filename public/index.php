@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // php -S localhost:8000 -t public
 if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Get url
@@ -28,10 +31,19 @@ Router::get('huissier/edit', 'HuissierController', 'edit');
 Router::get('huissier/update', 'HuissierController', 'update');
 Router::get('huissier/delete', 'HuissierController', 'delete');
 
+Router::get('admin/dashboard', 'AdminController', 'index');
+Router::get('admin/tout/demandes', 'AdminController', 'listDemandes');
+Router::get('admin/professional/accept', 'AdminController', 'acceptProfessional');
+Router::get('admin/professional/reject', 'AdminController', 'rejectProfessional');
+Router::get('admin/professional/profile', 'AdminController', 'showProfile');
+Router::get('admin/professional/pdf', 'AdminController', 'showPdf');
+
 Router::get('stats', 'StatsController', 'index'); 
 
 Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
+Router::get('emploi', 'ProfessionnelController', 'AjouteEmploi');
+Router::get('emploi/edit', 'ProfessionnelController', 'editEmploi');
 
 
 

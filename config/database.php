@@ -3,11 +3,6 @@ class Database
 {
 
     private $connection;
-
-    // public $host = "db";
-    // public $db_name = "isticharadb";
-    // public $username = "root";
-    // public $password = "root";
     public static $instance = null;
 
     public $host = '3.89.5.230';
@@ -18,7 +13,6 @@ class Database
     public $charset = 'utf8mb4';
 
     // public $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
 
 
     private function __construct()
