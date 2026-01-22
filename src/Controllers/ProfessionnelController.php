@@ -35,7 +35,7 @@ class ProfessionnelController
         }
 
         require_once __DIR__ . '/../Views/layouts/header.php';
-        require __DIR__ . '/../Views/professional/EmploiForm.php';
+        require __DIR__ . '/../Views/disponibilites/EmploiForm.php';
         require_once __DIR__ . '/../Views/layouts/footer.php';
     }
 
@@ -68,7 +68,7 @@ class ProfessionnelController
             }
         }
         require_once __DIR__ . '/../Views/layouts/header.php';
-        require_once __DIR__ . '/../Views/professional/editEmploi.php';
+        require_once __DIR__ . '/../Views/disponibilites/editEmploi.php';
         require_once __DIR__ . '/../Views/layouts/footer.php';
     }
 }
