@@ -55,6 +55,12 @@
                             <i class="fas fa-plus text-amber-600 mr-3"></i>
                             Nouveau Professionnel
                         </a>
+                        <?php if ($_SESSION["user"]["role"]==='admin'): ?>
+                        <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                                <i class="fas fa-cogs text-amber-600 mr-3"></i>
+                            management
+                        </a>
+                        <?php endif; ?>
                     </nav>
                 </div>
 
@@ -107,8 +113,8 @@
                                     <a style="cursor: pointer;" href="/update/user?user=<?= isset($_SESSION["user"]) ? $_SESSION["user"]["id"] : "1"  ?>" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
                                         <span class="sr-only">Open user menu</span>
                                         <div class="h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
-                                            <a href="/<?= $_SESSION["user"]["role"] ?>/dashboard">
-                                                <span class="text-white font-semibold">AD</span>
+                                            <a href="/<?= $_SESSION["user"]["role"] ?>/profile">
+                                                <span class="text-white font-semibold"><?= strtoupper($_SESSION["user"]["role"][0] . $_SESSION["user"]["role"][1]) ?></span>
                                             </a>
                                         </div>
                                     </a>

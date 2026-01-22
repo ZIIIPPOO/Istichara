@@ -2,6 +2,18 @@
 
 class AdminController
 {
+    public function profile()
+    {
+        require_once __DIR__ . '/../Models/Admin.php';
+
+        $id = $_SESSION['user']['id'];
+        $Admin = new Admin();
+        $admin = $Admin->getInfos($id);
+
+        require_once __DIR__ . '/../Views/layouts/header.php';
+        require_once __DIR__ . '/../Views/professional/AdminProfile.php';
+        require_once __DIR__ . '/../Views/layouts/footer.php';
+    }
     public function getProfessionels()
     {
         require_once __DIR__ . '/../Models/Avocat.php';

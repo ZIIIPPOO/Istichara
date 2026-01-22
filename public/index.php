@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 session_start();
 
 $_SESSION["user"] = [
-    "id" => 2,
+    "id" => 3,
     "name" => "hamza",
     "email"=> "hamza@gmail.com",
     "user_id" => 2,
-    "role" => "admin",
+    "role" => "avocat",
 ];
 
 // php -S localhost:8000 -t public
@@ -42,6 +42,7 @@ Router::get('huissier/edit', 'HuissierController', 'edit');
 Router::get('huissier/update', 'HuissierController', 'update');
 Router::get('huissier/delete', 'HuissierController', 'delete');
 
+Router::get('admin/profile', 'AdminController', 'profile');
 Router::get('admin/dashboard', 'AdminController', 'index');
 Router::get('admin/tout/demandes', 'AdminController', 'listDemandes');
 Router::get('admin/professional/accept', 'AdminController', 'acceptProfessional');
