@@ -26,12 +26,12 @@ class Avocat extends Person
     public function getAll()
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
-JOIN cities ON avocats.city_id = cities.id";
+        JOIN cities ON avocats.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+
     public function getAllByStatus()
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
@@ -52,6 +52,18 @@ JOIN cities ON avocats.city_id = cities.id";
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
+    public function profile($id)
+    {
+        $sql = "SELECT avocats.*, cities.name as city,users.* FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        INNER JOIN users ON avocats.user_id = users.id
+        where avocats.id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public function create()
     {
         $sql = "INSERT INTO avocats(name, city_id, specialites, annees_experience, tarif_horaire, consultation_en_ligne) VALUES (?,?,?,?,?,?)";

@@ -23,6 +23,26 @@ class AvocatController
         require_once __DIR__ . '/../Views/avocat/index.php';
         require_once __DIR__ . '/../Views/layouts/footer.php';
     }
+
+    public function profile()
+    {
+        require_once __DIR__ . '/../Models/Avocat.php';
+
+        $id = $_SESSION['user']['id'];
+
+        $Avocat = new Avocat();
+        $avocat = $Avocat->profile($id);
+        
+        require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
+
+        $Disponibilite = new DisponibilitesRepo();
+        $disponibilites = $Disponibilite->getAllDispoAvocat($id);
+
+        require_once __DIR__ . '/../Views/layouts/header.php';
+        require_once __DIR__ . '/../Views/avocat/profile.php';
+        require_once __DIR__ . '/../Views/layouts/footer.php';
+    }
+
     public function create()
     {
         require_once __DIR__ . '/../Models/Avocat.php';

@@ -26,6 +26,7 @@ require_once __DIR__ . '/../src/Helpers/Router.php';
 Router::get('', 'AvocatController', 'index');
 
 Router::get('avocats', 'AvocatController', 'index');
+Router::get('avocat/profile', 'AvocatController', 'profile');
 Router::get('avocat/create', 'AvocatController', 'create');
 Router::get('avocat/edit', 'AvocatController', 'edit');
 Router::get('avocat/update', 'AvocatController', 'update');

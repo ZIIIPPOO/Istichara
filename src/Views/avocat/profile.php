@@ -31,6 +31,12 @@
                     <p class="text-sm text-gray-500">Email</p>
                     <p class="font-semibold text-gray-800"><?= $avocat['email'] ?></p>
                 </div>
+                <?php if($_SESSION['user']['role']==='avocat'): ?>
+                <div>
+                    <p class="text-sm text-gray-500">telephone</p>
+                    <p class="font-semibold text-gray-800"><?= $avocat['telephone'] ?></p>
+                </div>
+                <?php endif; ?>
 
                 <div>
                     <p class="text-sm text-gray-500">Ville</p>
@@ -46,13 +52,23 @@
                     <p class="text-sm text-gray-500">Tarif horaire</p>
                     <p class="font-semibold text-gray-800"><?= $avocat['tarif_horaire'] ?> DH</p>
                 </div>
+            <?php if($_SESSION['user']['role']==='avocat'): ?>
+                                <div>
+                    <p class="text-sm text-gray-500">Date de creation</p>
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-amber-100 text-amber-700">
+                        <?= $avocat['created_at'] ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+
 
                 <div>
                     <p class="text-sm text-gray-500">Statut</p>
-                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-amber-100 text-amber-700">
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">
                         <?= $avocat['asigned'] ?>
                     </span>
                 </div>
+
 
             </div>
 
@@ -108,7 +124,8 @@
                 <p class="text-sm text-gray-500 mb-1">Spéciqlité</p>
                 <p class="font-medium text-gray-800"><?= $avocat['specialites'] ?></p>
             </div>
-
+        <?php if($_SESSION['user']['role']==='admin'): ?>
+            
             <!-- PDF -->
             <div class="bg-blue-50 p-4 rounded-lg flex items-center justify-between">
                 <div>
@@ -145,6 +162,15 @@
                     Accepter
                 </button>
             </a>
+
         </div>
+        
     </div>
+    <?php elseif($_SESSION['user']['role']==='avocat'): ?>
+       <a href="/update/user/accept?type=avocat&user=<?= $avocat['id'] ?>">
+           <button class="px-6 py-3  mt-5 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition flex items-center gap-2">
+               Edite Profile
+           </button>
+       </a>
+   <?php endif; ?>
 </div>
