@@ -1,10 +1,7 @@
-<section class="py-6 px-4 sm:px-6 lg:px-8">
-    <?php if (isset($success)): ?>
-        <div class="mb-6 p-4 bg-green-100 text-green-800 rounded-md">
-            <?= $success ?>
-        </div>
-    <?php endif; ?>
 
+<section class="py-6 px-4 sm:px-6 lg:px-8">
+    <!-- <div class="mb-6 p-4 bg-green-100 text-green-800 rounded-md">
+    </div> -->
     <form action="" method="POST" class="availability-form mb-8">
         <h1 class="text-2xl font-display font-semibold mb-4">Ajouter une disponibilité</h1>
 
@@ -39,7 +36,7 @@
             <label for="is_active" class="font-medium">Actif</label>
         </div>
 
-        <button type="submit" class="bg-primary-500 text-white px-6 py-3 rounded-full font-semibold shadow-primary-md hover:shadow-primary-lg transition">
+        <button type="submit" class="bg-primary-500 text-black px-6 py-3 rounded-full font-semibold shadow-primary-md hover:shadow-primary-lg transition">
             Enregistrer
         </button>
     </form>
@@ -57,7 +54,9 @@
             </tr>
         </thead>
         <tbody>
+
             <?php foreach ($dispos as $d): ?>
+
                 <tr class="border-b">
                     <td class="p-2"><?= ucfirst($d['jour_semaine']) ?></td>
                     <td class="p-2"><?= $d['heure_debut'] ?></td>
