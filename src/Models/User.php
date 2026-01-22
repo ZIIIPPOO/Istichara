@@ -1,5 +1,5 @@
 <?php
-
+require '../config/database.php';
 class User
 {
     private int $id;
@@ -12,7 +12,43 @@ class User
     private string $status;
     private string $created_at;
     private string $update_at;
- 
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance()->getConnection();
+    }
+
+    public function signUp($data) //:bool
+    {
+        $stmt = $this->db->prepare("INSERT INTO `users` ( `email`, `password`, `role`, `fullname`, `telephone`, `status`) VALUES (?,?,?,?,?,?)");
+        if($stmt->execute($data)){
+            return $this->db->lastInsertId();
+        }
+    }
+
+    public function signIn($data):bool|string
+    {
+        $stmt = $this->db->prepare("SELECT id,password FROM `users` where email= ?");
+        $stmt->execute([$data[0]]);
+        $result=$stmt->fetch();
+        // print_r($result);
+        // echo $data[1];
+        // echo $result;
+        // var_dump(password_verify($data[1],$result));
+        // die();
+        if (password_verify($data[1],$result['password'])) {
+            # code...
+            // print_r($result['id']);
+            // die();
+            // var_dump($result['id']);
+            // die();
+            return (int)$result['id'];
+        } else {
+            # code...
+            return 'false_credentials';
+        }
+    }
 
     public function getId(): int
     {
@@ -125,4 +161,6 @@ class User
         $this->update_at = $update_at;
         return $this;
     }
+
+
 }
