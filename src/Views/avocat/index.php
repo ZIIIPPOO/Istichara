@@ -22,11 +22,14 @@
                         <th>Spécialités</th>
                         <th>Expérience</th>
                         <th>Tarif/h</th>
+                        <?php if ($_SESSION['role']==='admin'): ?>
                         <th>Actions</th>
+                        <?php endif ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($avocats as $avocat): ?>
+                        
                         <tr>
                             <td>
                                 <div class="flex items-center">
@@ -42,6 +45,7 @@
                             </td>
                             <td><?= $avocat['annees_experience'] ?> ans</td>
                             <td class="font-semibold text-blue-900"><?= number_format($avocat['tarif_horaire']) ?> DH</td>
+                            <?php if ($_SESSION['role']==='admin'): ?>
                             <td>
                                 <div class="flex gap-2">
                                     <a href="/admin/professional/profile?type=avocat&id=<?= $avocat['id'] ?>" class="flex-1">
@@ -57,6 +61,7 @@
                                     </a>
                                 </div>
                             </td>
+                            <?php endif ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

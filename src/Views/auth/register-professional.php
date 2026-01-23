@@ -16,7 +16,7 @@
                 <i class="fas fa-balance-scale text-amber-500 text-2xl mr-3"></i>
                 <span class="text-xl font-bold">ISTICHARA</span>
             </div>
-            <a href="/login" class="text-blue-200 hover:text-white transition">
+            <a href="/signup" class="text-blue-200 hover:text-white transition">
                 <i class="fas fa-sign-in-alt mr-2"></i>Déjà inscrit ?
             </a>
         </div>

@@ -63,7 +63,7 @@
 
                 <div>
                     <p class="text-sm text-gray-500">Statut</p>
-                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-amber-100 text-amber-700">
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">
                         <?= $huissier['asigned'] ?>
                     </span>
                 </div>

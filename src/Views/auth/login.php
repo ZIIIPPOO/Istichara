@@ -58,7 +58,7 @@
                         <p class="text-gray-600 mt-2">Accédez à votre espace personnel</p>
                     </div>
 
-                    <form action="/login" method="POST" class="space-y-6">
+                    <form action="/User/signin" method="POST" class="space-y-6">
                         <!-- Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">

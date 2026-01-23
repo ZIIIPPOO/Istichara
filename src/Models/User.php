@@ -1,25 +1,64 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
-
+require '../config/database.php';
 class User
 {
     private int $id;
     private string $email;
     private string $password;
     private string $role;
-    // private string $nom;
-    private string $fullname;
-    private ?string $telephone;
+    private string $nom;
+    private string $prenom;
+    private string $telephone;
     private string $status;
     private string $created_at;
     private string $update_at;
-
-    protected $db;
+    private $db;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
     }
+
+    public function signUp($data) //:bool
+    {
+        $stmt = $this->db->prepare("INSERT INTO `users` ( `email`, `password`, `role`, `fullname`, `telephone`, `status`) VALUES (?,?,?,?,?,?)");
+        if ($stmt->execute($data)) {
+            return $this->db->lastInsertId();
+        }
+    }
+
+    // In Models/User.php
+
+    public function signIn($data)
+{
+    // 1. Fetch user data including ID and Role
+    $stmt = $this->db->prepare("SELECT id, password, role, status FROM `users` where email = ?");
+    $stmt->execute([$data[0]]);
+    $result = $stmt->fetch();
+
+    if (!$result) {
+        return 'false_credentials';
+    }
+
+    if (password_verify($data[1], $result['password'])) {
+        if ($result['status'] == 'pending') {
+            return false; 
+        } else {
+            // FIX: Use $this->setId instead of self::setId
+            $this->setId($result['id']); 
+            
+            // FIX: Return an ARRAY, not just the role string
+            return [
+                'id' => $result['id'],
+                'role' => $result['role']
+            ];
+        }
+    } else {
+        return 'false_credentials';
+    }
+}
+
+
     public function getId(): int
     {
         return $this->id;
@@ -40,14 +79,17 @@ class User
         return $this->role;
     }
 
-
-
-    public function getFullName(): string
+    public function getNom(): string
     {
-        return $this->fullname;
+        return $this->nom;
     }
 
-    public function getTelephone(): ?string
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
@@ -69,10 +111,9 @@ class User
 
 
 
-    public function setId(int $id): self
+    public function setId(int $id)
     {
         $this->id = $id;
-        return $this;
     }
 
     public function setEmail(string $email): self
@@ -93,14 +134,19 @@ class User
         return $this;
     }
 
-
-    public function setFullName(string $fullname): self
+    public function setNom(string $nom): self
     {
-        $this->fullname = $fullname;
+        $this->nom = $nom;
         return $this;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+        return $this;
+    }
+
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
         return $this;
@@ -122,59 +168,5 @@ class User
     {
         $this->update_at = $update_at;
         return $this;
-    }
-
-
-    public function update()
-    {
-        $db = Database::getInstance()->getConnection();
-        $sql = "UPDATE users SET fullname = ?, email = ?, role = ?, telephone = ?, status = ? WHERE id = ?";
-        $stmt = $db->prepare($sql);
-        return $stmt->execute([$this->fullname, $this->email, $this->role, $this->telephone, $this->id]);
-    }
-
-    public static function getById($id): array
-    {
-
-        $db = Database::getInstance()->getConnection();
-
-        $sql = "SELECT * FROM users WHERE id = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$id]);
-        return   $stmt->fetch();
-    }
-    public static function getUpdate(): bool
-    {
-
-        $db = Database::getInstance()->getConnection();
-        $id = $_POST["id"];
-
-        $s = "";
-
-
-
-        foreach ($_POST as $key => $value) {
-            $s .= "`$key`='$value', ";
-        }
-        $s = rtrim($s, ", ");
-
-        $sql = "UPDATE `users` SET $s WHERE id = ?";
-        
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$id]);
-        return   $stmt->fetch();
-    }
-
-    public static function userInstence(array $obj)
-    {
-        $user = new self();
-        $user->setId($obj["id"])
-            ->setEmail($obj["email"])
-            ->setFullName($obj["fullname"])
-            ->setPassword($obj["password"])
-            ->setRole($obj["role"])
-            ->setStatus($obj["status"])
-            ->setTelephone(isset($obj["telephone"]) ? $obj["telephone"] : null);
-        return $user;
     }
 }

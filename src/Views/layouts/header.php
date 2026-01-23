@@ -30,7 +30,7 @@
                             <i class="fas fa-home text-amber-600 mr-3 text-lg"></i>
                             Accueil
                         </a>
-
+                        <?php if ($_SESSION['role']==='client' || $_SESSION['role']==='admin'): ?>
                         <a href="/avocats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-user-tie text-amber-600 mr-3 text-lg"></i>
                             Avocats
@@ -40,25 +40,34 @@
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role']==='huissier' || $_SESSION['role']==='avocat') :?>
                         <a href="/emploi"
                             class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
                             Professionnel – Emploi du temps
                         </a>
-
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role']==='admin'): ?>
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
                             Statistiques
                         </a>
-
+                        
                         <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-plus text-amber-600 mr-3"></i>
                             Nouveau Professionnel
                         </a>
-                        <?php if ($_SESSION["user"]["role"]==='admin'): ?>
+                        
                         <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                                 <i class="fas fa-cogs text-amber-600 mr-3"></i>
                             management
+                        </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role']!=='admin'): ?>
+                        <a href="/reservations" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                            <i class="fas fa-calendar-check text-amber-600 mr-3 text-lg"></i>
+                            Réservations
                         </a>
                         <?php endif; ?>
                     </nav>

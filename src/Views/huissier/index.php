@@ -22,7 +22,9 @@
                         <th>Types d'Actes</th>
                         <th>Expérience</th>
                         <th>Tarif/acte</th>
+                        <?php if ($_SESSION['role']==='admin'): ?>
                         <th>Actions</th>
+                        <?php endif ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +44,7 @@
                             </td>
                             <td><?= $huissier['annees_experience'] ?> ans</td>
                             <td class="font-semibold text-blue-900"><?= number_format($huissier['tarif_horaire']) ?> DH</td>
+                            <?php if ($_SESSION['role']==='admin'): ?>
                             <td>
                                 <div class="flex gap-2">
                                     <a href="/admin/professional/profile?type=huissier&id=<?= $huissier['id'] ?>" class="flex-1">
@@ -57,6 +60,7 @@
                                     </a>
                                 </div>
                             </td>
+                            <?php endif ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
