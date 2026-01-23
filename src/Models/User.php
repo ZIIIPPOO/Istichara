@@ -144,6 +144,19 @@ class User
         return   $stmt->fetch();
     }
 
+    public static function getByIdAvocat($id): array
+    {
+
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "SELECT users.*, avocats.* FROM users
+        INNER JOIN avocats on users.id = avocats.user_id
+         WHERE users.id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        return   $stmt->fetch();
+    }
+
     public static function userInstence(array $obj)
     {
         $user = new User();
@@ -155,5 +168,42 @@ class User
             ->setStatus($obj["status"])
             ->setTelephone(isset($obj["telephone"]) ? $obj["telephone"] : null);
         return $user;
+    }
+
+    public static function getUpdate(): bool
+    {
+
+    $count =0;
+        $db = Database::getInstance()->getConnection();
+        $id = $_POST["id"];
+        $s = "";
+        foreach ($_POST as $key => $value) {
+            $count++;
+            $s .= "$key='$value', ";
+            if($count == 4){
+                break;
+            }
+        }
+        $s = rtrim($s, ", ");
+
+        $a = "";
+        foreach ($_POST as $key => $value) {
+            if($key === 'telephone'|| $key === 'password'|| $key === 'fullname'|| $key === 'role'|| $key === 'status'){
+                continue;
+            }
+            $a .= "$key='$value', ";
+        };
+        $a .= "name='".$_POST['fullname']."'";
+        $a = rtrim($a, ", ");
+
+
+        $sql = "UPDATE users SET $s WHERE id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+
+        $sql = "UPDATE avocats SET $a WHERE user_id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        return   $stmt->fetch();
     }
 }

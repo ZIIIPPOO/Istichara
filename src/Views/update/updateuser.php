@@ -11,7 +11,7 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/store/update" method="POST">
+            <form action="/store/user?type=<?= $_SESSION['user']['role'] ?>" method="POST">
                 <div class="p-8 space-y-6">
 
                     <!-- Hidden ID -->
@@ -31,7 +31,7 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">
                                     Full Name
                                 </label>
-                                <input type="text" name="nom"
+                                <input type="text" name="fullname"
                                     value="<?= htmlspecialchars($user->getFullName()) ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
@@ -53,7 +53,34 @@
                                     Téléphone
                                 </label>
                                 <input type="text" name="telephone"
-                                    value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : is_null($user->getTelephone())) ?>"
+                                    value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : ($user->getTelephone())) ?>"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                            </div>
+                            <!-- Specialite -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Specialite
+                                </label>
+                                <input type="text" name="specialites"
+                                    value="<?= htmlspecialchars($object['specialites']) ?>"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                            </div>
+                            <!-- annees_experience -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Annees experience
+                                </label>
+                                <input type="number" name="annees_experience"
+                                    value="<?= htmlspecialchars($object['annees_experience']) ?>"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                            </div>
+                            <!-- tarif_horaire -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Tarif horaire
+                                </label>
+                                <input type="number" name="tarif_horaire"
+                                    value="<?= htmlspecialchars($object['tarif_horaire']) ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
 
@@ -125,6 +152,17 @@
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                                     <option value="ADMIN" <?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
                                     <option value="USER" <?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
+                                </select>
+                            </div>
+                            <!-- consultation_en_ligne -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    consultation en ligne
+                                </label>
+                                <select name="consultation_en_ligne"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                                    <option value=1 <?= $object['consultation_en_ligne'] === 1 ? 'selected' : '' ?>>yes</option>
+                                    <option value=0 <?= $object['consultation_en_ligne'] === 0 ? 'selected' : '' ?>>no</option>
                                 </select>
                             </div>
 
