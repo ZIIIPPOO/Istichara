@@ -50,9 +50,9 @@ class UserController
     $loginResult = $user->signIn($data);
 
     // Check if result is an array (Success)
-    // FIX: Access the array keys we defined in the Model
     if (is_array($loginResult)) {
         
+        // FIX: Access the array keys we defined in the Model
         $_SESSION['user_id'] = $loginResult['id']; 
         $_SESSION['role']    = $loginResult['role']; 
 
@@ -64,10 +64,14 @@ class UserController
             require_once __DIR__. '/../Views/layouts/header.php';
             require_once __DIR__. '/../Views/client/dashboard.php';
             require_once __DIR__. '/../Views/layouts/footer.php';
-        } else {
+        } elseif($_SESSION['role'] === 'admin'){
             // For avocat/huissier
-            header('Location: /reservations');
+            require_once __DIR__. '/../Views/layouts/header.php';
+            require_once __DIR__. '/../Views/professional/dashboard.php';
+            require_once __DIR__. '/../Views/layouts/footer.php';
         }
+        
+
         exit();
 
     } elseif ($loginResult === 'false_credentials') {

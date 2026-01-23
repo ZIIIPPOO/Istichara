@@ -12,10 +12,10 @@
 
 <body class="h-full">
     <div class="min-h-full">
-        <!-- Sidebar -->
+
         <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
             <div class="flex min-h-0 flex-1 flex-col bg-blue-900">
-                <!-- Logo -->
+
                 <div class="flex h-16 flex-shrink-0 items-center px-4 bg-blue-950">
                     <div class="flex items-center">
                         <i class="fas fa-balance-scale text-amber-600 text-2xl mr-3"></i>
@@ -23,14 +23,14 @@
                     </div>
                 </div>
 
-                <!-- Navigation -->
+
                 <div class="flex flex-1 flex-col overflow-y-auto">
                     <nav class="flex-1 space-y-1 px-2 py-4">
                         <a href="/" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-home text-amber-600 mr-3 text-lg"></i>
                             Accueil
                         </a>
-
+                        <?php if ($_SESSION['role']==='client' || $_SESSION['role']==='admin'): ?>
                         <a href="/avocats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-user-tie text-amber-600 mr-3 text-lg"></i>
                             Avocats
@@ -40,20 +40,36 @@
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
-
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role']==='huissier' || $_SESSION['role']==='avocat') :?>
+                        <a href="/emploi"
+                            class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                            <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
+                            Professionnel – Emploi du temps
+                        </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role']==='admin'): ?>
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
                             Statistiques
                         </a>
-
+                        
                         <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-plus text-amber-600 mr-3"></i>
                             Nouveau Professionnel
                         </a>
+                        
+                        <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                                <i class="fas fa-cogs text-amber-600 mr-3"></i>
+                            management
+                        </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['role']!=='admin'): ?>
                         <a href="/reservations" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-calendar-check text-amber-600 mr-3 text-lg"></i>
                             Réservations
                         </a>
+                        <?php endif; ?>
                     </nav>
                 </div>
 
@@ -88,7 +104,10 @@
                             </div>
                         </div>
                     </div>
-
+                    <a href="profs/stats?tarif=100&type=avocat&id=2" class="btn-action btn-primary">
+                        <!-- <i class="fas fa-plus"></i> -->
+                        prof stats
+                    </a>
                     <div class="ml-4 flex items-center md:ml-6">
                         <button type="button" class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
                             <span class="sr-only">View notifications</span>
@@ -97,16 +116,31 @@
 
                         <div class="relative ml-3">
                             <div class="flex items-center">
-                                <button type="button" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
-                                    <span class="sr-only">Open user menu</span>
-                                    <div class="h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
-                                        <span class="text-white font-semibold">AD</span>
+                                <?php
+                                if (isset($_SESSION["user"])) { ?>
+
+                                    <a style="cursor: pointer;" href="/update/user?user=<?= isset($_SESSION["user"]) ? $_SESSION["user"]["id"] : "1"  ?>" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2">
+                                        <span class="sr-only">Open user menu</span>
+                                        <div class="h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
+                                            <a href="/<?= $_SESSION["user"]["role"] ?>/profile">
+                                                <span class="text-white font-semibold"><?= strtoupper($_SESSION["user"]["role"][0] . $_SESSION["user"]["role"][1]) ?></span>
+                                            </a>
+                                        </div>
+                                    </a>
+
+                                    <div class="ml-3 hidden md:block">
+                                        <p class="text-sm font-medium text-gray-700"> <?= $_SESSION["user"]["name"] ?> </p>
+                                        <p class="text-xs text-gray-500"> <?= $_SESSION["user"]["email"] ?> </p>
                                     </div>
-                                </button>
-                                <div class="ml-3 hidden md:block">
-                                    <p class="text-sm font-medium text-gray-700">Administrateur</p>
-                                    <p class="text-xs text-gray-500">admin@istichara.ma</p>
-                                </div>
+                                <?php } else { ?>
+                                    <a href="#" class="btn-action btn-primary">
+                                        <!-- <i class="fas fa-plus"></i> -->
+                                        Log in
+                                    </a>
+
+                                <?php } ?>
+
+
                             </div>
                         </div>
                     </div>

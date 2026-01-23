@@ -22,38 +22,48 @@
                         <th>Spécialités</th>
                         <th>Expérience</th>
                         <th>Tarif/h</th>
+                        <?php if ($_SESSION['role']==='admin'): ?>
                         <th>Actions</th>
+                        <?php endif ?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($avocats as $avocat):?>
-                    <tr>
-                        <td>
-                            <div class="flex items-center">
-                                <div>
-                                    <p class="font-semibold text-gray-900"><?= $avocat['name'] ?></p>
-                                    <p class="text-xs text-gray-500">Avocat</p>
+                    <?php foreach ($avocats as $avocat): ?>
+                        
+                        <tr>
+                            <td>
+                                <div class="flex items-center">
+                                    <div>
+                                        <p class="font-semibold text-gray-900"><?= $avocat['name'] ?></p>
+                                        <p class="text-xs text-gray-500">Avocat</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td><?= $avocat['city'] ?></td>
-                        <td>
-                            <span class="badge badge-primary"><?= $avocat['specialites'] ?></span>
-                        </td>
-                        <td><?= $avocat['annees_experience'] ?> ans</td>
-                        <td class="font-semibold text-blue-900"><?= number_format($avocat['tarif_horaire'])?> DH</td>
-                        <td>
-                            <div class="flex gap-2">
-                                <a href="/avocat/edit?id=<?= $avocat['id'] ?>" class="text-blue-600 hover:text-blue-800">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="/avocat/delete?id=<?= $avocat['id'] ?>" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr ?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
+                            </td>
+                            <td><?= $avocat['city'] ?></td>
+                            <td>
+                                <span class="badge badge-primary"><?= $avocat['specialites'] ?></span>
+                            </td>
+                            <td><?= $avocat['annees_experience'] ?> ans</td>
+                            <td class="font-semibold text-blue-900"><?= number_format($avocat['tarif_horaire']) ?> DH</td>
+                            <?php if ($_SESSION['role']==='admin'): ?>
+                            <td>
+                                <div class="flex gap-2">
+                                    <a href="/admin/professional/profile?type=avocat&id=<?= $avocat['id'] ?>" class="flex-1">
+                                        <button class="w-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-5 py-2.5 mt-4 rounded-xl font-semibold hover:scale-105 hover:shadow-lg transition flex items-center justify-center gap-2" title="Voir profil">
+                                            <i class="fas fa-user"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/avocat/edit?id=<?= $avocat['id'] ?>" class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="/avocat/delete?id=<?= $avocat['id'] ?>" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr ?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            <?php endif ?>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

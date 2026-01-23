@@ -18,15 +18,39 @@ class Huissier extends Person
     public function getAll()
     {
         $sql = "SELECT huissiers.*, cities.name as city, huissiers.name as nom FROM huissiers
-JOIN cities ON huissiers.city_id = cities.id";
+        JOIN cities ON huissiers.city_id = cities.id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
+    public function getAllByStatus()
+    {
+        $sql = "SELECT huissiers.*, cities.name as city, huissiers.name as nom FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        where huissiers.asigned = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['pending']);
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
     public function getById($id)
     {
-        $sql = "SELECT * FROM huissiers WHERE id = ?";
+        $sql = "SELECT huissiers.*, cities.name as city, huissiers.name as nom FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        where huissiers.id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
+    public function profile($id)
+    {
+        $sql = "SELECT huissiers.*, cities.name as city,users.* FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        INNER JOIN users ON huissiers.user_id = users.id
+        where huissiers.id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch();
@@ -46,6 +70,13 @@ JOIN cities ON huissiers.city_id = cities.id";
         $sql = "UPDATE huissiers SET name = ?, city_id = ?, type_actes = ?, annees_experience = ?, tarif_horaire = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$this->name, $this->cityId, $this->typeActes, $this->anneesExperience, $this->tarifHoraire, $this->id]);
+    }
+
+    public function updateStausById(int $id, string $status)
+    {
+        $sql = "UPDATE huissiers SET asigned =? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$status, $id]);
     }
 
     public function delete($id)

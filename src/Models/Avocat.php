@@ -26,19 +26,45 @@ class Avocat extends Person
     public function getAll()
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
-JOIN cities ON avocats.city_id = cities.id";
+        JOIN cities ON avocats.city_id = cities.id
+        WHERE avocats.asigned = 'accepted'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getById($id)
+    public function getAllByStatus()
     {
-        $sql = "SELECT * FROM avocats WHERE id = ?";
+        $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        where avocats.asigned = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['pending']);
+        $results = $stmt->fetchAll();
+        return $results;
+    }
+
+    public function getById(int $id)
+    {
+        $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        where avocats.id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
+    public function profile($id)
+    {
+        $sql = "SELECT avocats.*, cities.name as city,users.* FROM avocats
+        JOIN cities ON avocats.city_id = cities.id
+        INNER JOIN users ON avocats.user_id = users.id
+        where avocats.id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public function create()
     {
         $sql = "INSERT INTO avocats(name, city_id, specialites, annees_experience, tarif_horaire, consultation_en_ligne) VALUES (?,?,?,?,?,?)";
@@ -50,6 +76,12 @@ JOIN cities ON avocats.city_id = cities.id";
         $sql = "UPDATE avocats SET name = ?, city_id = ?, specialites = ?, annees_experience = ?, tarif_horaire = ?, consultation_en_ligne = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$this->name, $this->cityId, $this->specialites, $this->anneesExperience, $this->tarifHoraire, $this->consultationEnLigne, $this->id]);
+    }
+    public function updateStausById(int $id, string $status)
+    {
+        $sql = "UPDATE avocats SET asigned =? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$status, $id]);
     }
     public function delete($id)
     {
@@ -69,8 +101,9 @@ JOIN cities ON avocats.city_id = cities.id";
     public function getAllPagination($start, $resultPerPage)
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom 
-            FROM avocats 
+            FROM avocats
             JOIN cities ON avocats.city_id = cities.id 
+            WHERE avocats.asigned = 'accepted'
             LIMIT $start, $resultPerPage";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
