@@ -1,25 +1,29 @@
 <?php
 
+
 class ReservationController
 {
     public function index()
     {
         require_once __DIR__ . '/../Models/Reservation.php';
-        $reservation = new Reservation();
-        // if($_SESSION['role'] === 'client') {
-        //     // Client sees their own reservations
-            $reservations = $reservation->getByClientId(1);
+    // var_dump($_SESSION['user_id']);
+
+        if($_SESSION['role'] === 'client') {
+            // echo "sasad";
+            $reservation = new Reservation();
+            $reservations = $reservation->getByClientId($_SESSION['user_id']);
+
             require_once __DIR__ . '/../Views/layouts/header.php';
             require_once __DIR__ . '/../Views/reservations/client_index.php';
             require_once __DIR__ . '/../Views/layouts/footer.php';
-        // } 
-        // else if($_SESSION['role'] === 'avocat' || $_SESSION['role'] === 'huissier') {
-        //     // Professional sees their reservation requests
-            // $reservations = $reservation->getByProId(4);
-            // require_once __DIR__ . '/../Views/layouts/header.php';
-            // require_once __DIR__ . '/../Views/reservations/index.php';
-            // require_once __DIR__ . '/../Views/layouts/footer.php';
-        // }
+        } 
+        else if($_SESSION['role'] === 'avocat' || $_SESSION['role'] === 'huissier') {
+            $reservation = new Reservation();
+            $reservations = $reservation->getByProId($_SESSION['user_id']);
+            require_once __DIR__ . '/../Views/layouts/header.php';
+            require_once __DIR__ . '/../Views/reservations/index.php';
+            require_once __DIR__ . '/../Views/layouts/footer.php';
+        }
 
     }
     public function create()
@@ -28,7 +32,6 @@ class ReservationController
         require_once __DIR__ . '/../Models/Huissier.php';
         require_once __DIR__ . '/../Models/Reservation.php';
 
-        // IF USER SUBMITTED THE FORM
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if (!empty($_POST['avocat_id'])) {
@@ -41,7 +44,7 @@ class ReservationController
             }
             
             $reservation = new Reservation();
-            $reservation->setClientId(1); // $_SESSION['user_id']
+            $reservation->setClientId($_SESSION['user_id']);
             $reservation->setProfessionalId($professional_id);
             $reservation->setProfessionalType($professional_type);
             $reservation->setDateReservation($_POST['date_reservation']);

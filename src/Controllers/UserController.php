@@ -1,87 +1,85 @@
 <?php
-session_start();
-// use Helper\MailHelper;
-require __DIR__.'/../Helpers/MailHelper.php';
-use PHPMailer\PHPMailer\Exception;
-require __DIR__.'/../Models/User.php';
-require '../vendor/autoload.php';
-class UserController{
 
-public function showRegisterForm()
+require __DIR__ . '/../Models/User.php';
+require '../vendor/autoload.php';
+
+class UserController
 {
-    require 'C:\laragon\www\istichara_brief2\Istichara\src\Views\auth\register-client.php';
-}
+
+    public function showRegisterForm()
+    {
+        require_once __DIR__ . '/../Views/auth/register-client.php';
+    }
 
     public function signUp()
     {
-        // require 'C:\laragon\www\istichara_brief2\Istichara\src\Views\auth\register-client.php';
-        $_SESSION['data']=[$_POST['email'],password_hash($_POST['password'],PASSWORD_BCRYPT),$_POST['role'],$_POST['fullname'],$_POST['telephone'],'pending'];
-        //INSERT INTO `users`( `email`, `password`, `role`, `fullname`, `telephone`, `status`) VALUES ()
-        if ( $_POST['password'] == $_POST['password_confirmation']) {
-            # code...
-            try {
-                //code...
-                $mailHelper = new MailHelper();
-                $mailHelper->setSender('tarikelyatim2006@gmail.com','top');
-                // $mailHelper->setUserName('tarikelyatim2006@gmail.com');
-                $mailHelper->addRecipient('tarikelyatim2006@gmail.com','rtytrty');
-                $Subject='Email Verification';
-                $code=substr(str_shuffle("0123456789"), 0, 6);
-                $Body='c\'est vous qui vient de creer un compte , si oui attendez la validation d\'administrateur ,ecrire ce code  '.$code;
-                $mailHelper->setContent($Subject,$Body);
-                $mailHelper->send();
-                $_SESSION['code']=$code;
-                header('location:/verificationform');
-            } catch (\Exception $th) {
-                throw $th;
-        }
-            }else {
-                header("Location: User/signup?error=password_mismatch");
+        // 1. Remove the die() statement
+        // 2. Ensure $data matches database columns exactly
+        $data = [
+            $_POST['email'],
+            password_hash($_POST['password'], PASSWORD_BCRYPT),
+            $_POST['role'],
+            $_POST['fullname'],
+            $_POST['telephone'],
+            'active' // Default status
+        ];
+
+        if ($_POST['password'] === $_POST['password_confirmation']) {
+            $user = new User();
+            $id = $user->signUp($data);
+
+            if ($id) {
+                // Registration successful
+                $_SESSION['user_id'] = $id;
+                // Redirect to dashboard or show success message, not signin
+                header('Location: /User/signin');
+                exit();
+            } else {
+                echo "Error creating account.";
             }
-        
-    }
- 
-    public function showconfirm()
-    {
-        require 'C:\laragon\www\istichara_brief2\Istichara\src\Views\auth\email-verif.php';
-    }
-
-    public function emailVerification()
-    {
-        echo $_POST['code'],$_SESSION['code'];
-        if ($_POST['code']==$_SESSION['code']) {
-            # code...
-            print_r($_SESSION);
-            (new User)->signUp($_SESSION['data']);
-            require __DIR__.'/../views/auth/login.php';
+        } else {
+            header("Location: /register/client?error=password_mismatch");
+            exit();
         }
     }
 
-    public function showformpro()
-    {
-        require __DIR__.'/../views/auth/register-professional.php';
-    }
+    public function signIn() {
+    $data = [$_POST['email'], $_POST['password']];
+    $user = new User();
+    
+    $loginResult = $user->signIn($data);
 
+    // Check if result is an array (Success)
+    // FIX: Access the array keys we defined in the Model
+    if (is_array($loginResult)) {
+        
+        $_SESSION['user_id'] = $loginResult['id']; 
+        $_SESSION['role']    = $loginResult['role']; 
+
+        // Debugging: This should now show "avocat" or "client"
+        // var_dump($_SESSION['role']); die(); 
+        
+        // Redirect based on role
+        if ($_SESSION['role'] === 'client') {
+            require_once __DIR__. '/../Views/layouts/header.php';
+            require_once __DIR__. '/../Views/client/dashboard.php';
+            require_once __DIR__. '/../Views/layouts/footer.php';
+        } else {
+            // For avocat/huissier
+            header('Location: /reservations');
+        }
+        exit();
+
+    } elseif ($loginResult === 'false_credentials') {
+        $errorMessage = "Email ou mot de passe incorrect";
+        require __DIR__.'/../Views/auth/login.php';
+    }
+}
+    
+
+    // ... keep your other functions (showconn, etc.) ...
     public function showconn()
     {
-        require __DIR__.'/../views/auth/login.php';
-    }
-
-    public function signIn()
-    {
-        $data=[$_POST['email'],$_POST['password']];
-        $user=new User();
-        if ($user->signIn($data) !== 'false_credentials' ) {
-            # code...
-            $id=$user->signIn($data);
-            $_SESSION['user_id']=$id;
-            require 'C:\laragon\www\istichara_brief2\Istichara\src\Views\layouts\header.php';
-            require 'C:\laragon\www\istichara_brief2\Istichara\src\Views\client\dashboard.php';
-            require 'C:\laragon\www\istichara_brief2\Istichara\src\Views\layouts\footer.php';
-        } else {
-            # code...
-            // echo 'in else';
-            include_once __DIR__.'/../views/auth/login.php?message=false_credentials';
-        }   
+        require __DIR__ . '/../Views/auth/login.php';
     }
 }

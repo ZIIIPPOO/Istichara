@@ -4,6 +4,8 @@
 require "../vendor/autoload.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
+require __DIR__.'/composer.lock';
+require __DIR__.'/composer.json';
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 

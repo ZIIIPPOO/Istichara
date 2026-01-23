@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+
 
 // php -S localhost:8000 -t public
 if (php_sapi_name() === 'cli-server') { // check for php -S utilisation
@@ -33,7 +36,9 @@ Router::get('reservations', 'ReservationController', 'index');
 Router::get('reservations/create', 'ReservationController', 'create');
 Router::get('reservations/accept', 'ReservationController', 'accept');
 Router::get('reservations/reject', 'ReservationController', 'reject');
-Router::get('reservations/delete', 'ReservationController', 'delete');Router::get('User/signup', 'UserController', 'signUp');
+Router::get('reservations/delete', 'ReservationController', 'delete');
+
+Router::get('User/signup', 'UserController', 'signUp');
 Router::get('User/signin', 'UserController', 'signIn');
 Router::get('User/verification', 'UserController', 'emailVerification');
 Router::get('verificationform', 'UserController', 'showconfirm');
