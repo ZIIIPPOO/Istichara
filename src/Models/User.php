@@ -156,6 +156,18 @@ class User
         $stmt->execute([$id]);
         return   $stmt->fetch();
     }
+    public static function getByIdHuissier($id): array
+    {
+
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "SELECT users.*, huissiers.* FROM users
+        INNER JOIN huissiers on users.id = huissiers.user_id
+         WHERE users.id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        return   $stmt->fetch();
+    }
 
     public static function userInstence(array $obj)
     {
@@ -170,7 +182,7 @@ class User
         return $user;
     }
 
-    public static function getUpdate(): bool
+    public static function getUpdateAvocat(): bool
     {
 
     $count =0;
@@ -202,6 +214,40 @@ class User
         $stmt->execute([$id]);
 
         $sql = "UPDATE avocats SET $a WHERE user_id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        return   $stmt->fetch();
+    }
+    public static function getUpdateHuissier(): bool
+    {
+        $count =0;
+        $db = Database::getInstance()->getConnection();
+        $id = $_POST["id"];
+        $s = "";
+        foreach ($_POST as $key => $value) {
+            $count++;
+            $s .= "$key='$value', ";
+            if($count == 4){
+                break;
+            }
+        }
+        $s = rtrim($s, ", ");
+        $a = "";
+        foreach ($_POST as $key => $value) {
+            if($key === 'telephone'|| $key === 'password'|| $key === 'fullname'|| $key === 'role'|| $key === 'status'){
+                continue;
+            }
+            $a .= "$key='$value', ";
+        };
+        $a .= "name='".$_POST['fullname']."'";
+        $a = rtrim($a, ", ");
+
+
+        $sql = "UPDATE users SET $s WHERE id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+
+        $sql = "UPDATE huissiers SET $a WHERE user_id = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         return   $stmt->fetch();

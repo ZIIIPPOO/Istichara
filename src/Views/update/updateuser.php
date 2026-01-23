@@ -36,7 +36,7 @@
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
 
-                         
+
                             <!-- Email -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -56,15 +56,28 @@
                                     value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : ($user->getTelephone())) ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
-                            <!-- Specialite -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Specialite
-                                </label>
-                                <input type="text" name="specialites"
-                                    value="<?= htmlspecialchars($object['specialites']) ?>"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                            </div>
+                            <?php if ($_SESSION['user']['role'] === 'avocat'): ?>
+                                <!-- Specialite -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Specialite
+                                    </label>
+                                    <input type="text" name="specialites"
+                                        value="<?= htmlspecialchars($object['specialites']) ?>"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($_SESSION['user']['role'] === 'huissier'): ?>
+                                <!-- type_actes -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        type actes
+                                    </label>
+                                    <input type="text" name="type_actes"
+                                        value="<?= htmlspecialchars($object['type_actes']) ?>"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                                </div>
+                            <?php endif; ?>
                             <!-- annees_experience -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -154,63 +167,65 @@
                                     <option value="USER" <?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
                                 </select>
                             </div>
-                            <!-- consultation_en_ligne -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    consultation en ligne
-                                </label>
-                                <select name="consultation_en_ligne"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                                    <option value=1 <?= $object['consultation_en_ligne'] === 1 ? 'selected' : '' ?>>yes</option>
-                                    <option value=0 <?= $object['consultation_en_ligne'] === 0 ? 'selected' : '' ?>>no</option>
-                                </select>
-                            </div>
+                            <?php if ($_SESSION['user']['role'] === "avocat"): ?>
+                                <!-- consultation_en_ligne -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        consultation en ligne
+                                    </label>
+                                    <select name="consultation_en_ligne"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
+                                        <option value=1 <?= $object['consultation_en_ligne'] === 1 ? 'selected' : '' ?>>yes</option>
+                                        <option value=0 <?= $object['consultation_en_ligne'] === 0 ? 'selected' : '' ?>>no</option>
+                                    </select>
+                                </div>
 
                         </div>
                     </div>
+                <?php endif; ?>
 
-                    <!-- Status -->
-                    <div class="border-b border-gray-200 pb-6">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                            <i class="fas fa-toggle-on text-amber-600 mr-2"></i>
-                            Statut du Compte
-                        </h2>
+                <!-- Status -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-toggle-on text-amber-600 mr-2"></i>
+                        Statut du Compte
+                    </h2>
 
-                        <div class="flex items-center space-x-6">
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="status" value="suspended"
-                                    <?= $user->getStatus() === 'suspended' ? 'checked' : '' ?>
-                                    class="w-4 h-4 text-blue-900 focus:ring-blue-900">
-                                <span class="text-sm text-gray-700">suspended</span>
-                            </label>
+                    <div class="flex items-center space-x-6">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="status" value="suspended"
+                                <?= $user->getStatus() === 'suspended' ? 'checked' : '' ?>
+                                class="w-4 h-4 text-blue-900 focus:ring-blue-900">
+                            <span class="text-sm text-gray-700">suspended</span>
+                        </label>
 
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="status" value="active"
-                                    <?= $user->getStatus() === 'active' ? 'checked' : '' ?>
-                                    class="w-4 h-4 text-blue-900 focus:ring-blue-900">
-                                <span class="text-sm text-gray-700">active</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="status" value="pending"
-                                    <?= $user->getStatus() === 'pending' ? 'checked' : '' ?>
-                                    class="w-4 h-4 text-blue-900 focus:ring-blue-900">
-                                <span class="text-sm text-gray-700">pending</span>
-                            </label>
-                        </div>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="status" value="active"
+                                <?= $user->getStatus() === 'active' ? 'checked' : '' ?>
+                                class="w-4 h-4 text-blue-900 focus:ring-blue-900">
+                            <span class="text-sm text-gray-700">active</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="status" value="pending"
+                                <?= $user->getStatus() === 'pending' ? 'checked' : '' ?>
+                                class="w-4 h-4 text-blue-900 focus:ring-blue-900">
+                            <span class="text-sm text-gray-700">pending</span>
+                        </label>
                     </div>
+                </div>
 
-                    <!-- Action Buttons -->
-                    <div class="flex items-center justify-end space-x-4 pt-6">
-                        <a href="/users" class="btn-action btn-secondary">
-                            <i class="fas fa-times"></i>
-                            Annuler
-                        </a>
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-end space-x-4 pt-6">
+                    <a href="/users" class="btn-action btn-secondary">
+                        <i class="fas fa-times"></i>
+                        Annuler
+                    </a>
 
-                        <button type="submit" class="btn-action btn-primary">
-                            <i class="fas fa-save"></i>
-                            Mettre à jour
-                        </button>
-                    </div>
+                    <button type="submit" class="btn-action btn-primary">
+                        <i class="fas fa-save"></i>
+                        Mettre à jour
+                    </button>
+                </div>
 
                 </div>
             </form>
@@ -237,7 +252,7 @@
         const form = document.querySelector('form');
 
         function validatePasswords() {
-            
+
             if (password.value === '' && repassword.value === '') {
                 errorMsg.classList.add('hidden');
                 return true;
