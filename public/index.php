@@ -10,7 +10,7 @@ $_SESSION["user"] = [
     "name" => "hamza",
     "email"=> "hamza@gmail.com",
     "user_id" => 6,
-    "role" => "huissier",
+    "role" => "huissier"
 ];
 
 // php -S localhost:8000 -t public
