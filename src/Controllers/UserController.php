@@ -7,7 +7,7 @@ class UserController
 
     public function edit()
     {
-        $id = $_GET["user"];
+        $id = $_GET["user"]; // 1
         $object = User::getById($id);
         // var_dump($object);
         $user = User::userInstence($object);
@@ -19,14 +19,8 @@ class UserController
     }
     public function update()
     {
-        // $id = $_POST["id"];
-
-        // var_dump($_POST);
-
-        // $object = User::getById($id);
-        // var_dump($object);
+     
         $user = User::getUpdate();
-        // var_dump($user->getTelephone());
 
        header("location: /");
     }

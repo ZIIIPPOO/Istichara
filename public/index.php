@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 session_start();
 
 $_SESSION["user"] = [
-    "id" => 3,
+    "id" => 6,
     "name" => "hamza",
     "email"=> "hamza@gmail.com",
     "user_id" => 2,
-    "role" => "avocat",
+    "role" => "huissier",
 ];
 
 // php -S localhost:8000 -t public
@@ -38,6 +38,7 @@ Router::get('store/user', 'UserController', 'update');
 Router::get('profs/stats', 'DashboardController', 'index');
 
 Router::get('huissiers', 'HuissierController', 'index');
+Router::get('huissier/profile', 'HuissierController', 'profile');
 Router::get('huissier/create', 'HuissierController', 'create');
 Router::get('huissier/edit', 'HuissierController', 'edit');
 Router::get('huissier/update', 'HuissierController', 'update');

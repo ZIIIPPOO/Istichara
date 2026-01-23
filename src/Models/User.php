@@ -151,7 +151,7 @@ class User
 
         $s = "";
 
-    
+
 
         foreach ($_POST as $key => $value) {
             $s .= "`$key`='$value', ";

@@ -45,6 +45,17 @@ class Huissier extends Person
         return $stmt->fetch();
     }
 
+    public function profile($id)
+    {
+        $sql = "SELECT huissiers.*, cities.name as city,users.* FROM huissiers
+        JOIN cities ON huissiers.city_id = cities.id
+        INNER JOIN users ON huissiers.user_id = users.id
+        where huissiers.id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public function create()
     {
         $sql = "INSERT INTO huissiers(name, city_id, type_actes, annees_experience, tarif_horaire) 

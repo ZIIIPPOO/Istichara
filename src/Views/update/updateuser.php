@@ -60,6 +60,8 @@
                         </div>
                     </div>
 
+                 
+
                     <!-- Sécurité & Rôle -->
                     <div class="border-b border-gray-200 pb-6">
                         <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
@@ -118,11 +120,11 @@
 
                             <!-- Role -->
                             <!-- <div> -->
-                                <!-- <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <!-- <label class="block text-sm font-medium text-gray-700 mb-2">
                                     Rôle -->
-                                <!-- </label>
+                            <!-- </label>
                                 <input readonly type="text" name="role" value=" < ?= $user->getRole() ?>"> -->
-                                <!-- <select name="role" readonly
+                            <!-- <select name="role" readonly
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                                     <option value="admin" < ?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
                                     <option value="user" < ?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
