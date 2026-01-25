@@ -1,13 +1,17 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
 $_SESSION["user"] = [
-    "id" => 6,
+    "id" => 2,
     "name" => "hamza",
     "email"=> "hamza@gmail.com",
     "user_id" => 2,
-    "role" => "huissier",
+    "role" => "client",
 ];
 
 // php -S localhost:8000 -t public
@@ -53,10 +57,22 @@ Router::get('stats', 'StatsController', 'index');
 
 Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
 
+Router::get('reservations', 'ReservationController', 'index');
+Router::get('reservations/create', 'ReservationController', 'create');
+Router::get('reservations/accept', 'ReservationController', 'accept');
+Router::get('reservations/reject', 'ReservationController', 'reject');
+Router::get('reservations/delete', 'ReservationController', 'delete');
+Router::get('User/signup', 'UserController', 'signUp');
+Router::get('User/signin', 'UserController', 'signIn');
+Router::get('User/verification', 'UserController', 'emailVerification');
+Router::get('verificationform', 'UserController', 'showconfirm');
+Router::get('showformpro', 'UserController', 'showformpro');
+Router::get('showconn', 'UserController', 'showconn');
+
 Router::get('emploi', 'ProfessionnelController', 'AjouteEmploi');
 Router::get('emploi/edit', 'ProfessionnelController', 'editEmploi');
-Router::get('client/reservation', 'ReservationController', 'reserve');
-
-
+Router::get('reservation/disponibilite', 'ProfessionnelController', 'getProfsDispos');
+Router::get('reservation', 'ReservationController', 'showReservationForm');
+// Router::get('/reservations/create', 'ReservationController', 'create');
 
 Router::dispatch();

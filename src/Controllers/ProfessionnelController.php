@@ -30,7 +30,7 @@ class ProfessionnelController
                 }
 
                 $dispos = new DisponibilitesRepo();
-                $dispos = $dispos->getAllDispo(1); //$_SESSION['user_id']
+                $dispos = $dispos->getAllDispo($_SESSION['user_id']);
             }
         }
 
@@ -52,8 +52,8 @@ class ProfessionnelController
             $row_id = $_POST['dispoRow_id'];
             $user_id = $_SESSION['user_id'];
             $jour_semaine = isset($_POST['jour_semaine']);
-            $heure_debut = isset($_POST['heure_debut']);
-            $heure_fin = isset($_POST['heure_fin']);
+            $heure_debut = (int) date('H', strtotime($_POST['heure_debut']));
+            $heure_fin   = (int) date('H', strtotime($_POST['heure_fin']));
             $Active = isset($_POST['is_active']);
             if ($heure_debut < $heure_fin) {
                 $edited = new Disponibilites(
@@ -69,6 +69,21 @@ class ProfessionnelController
         }
         require_once __DIR__ . '/../Views/layouts/header.php';
         require_once __DIR__ . '/../Views/disponibilites/editEmploi.php';
+        require_once __DIR__ . '/../Views/layouts/footer.php';
+    }
+    public function getProfsDispos()
+    {
+        require_once __DIR__ . '/../Models/Disponibilites.php';
+        require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prof_id'])) {
+            $prof_id = (int)$_POST['prof_id'];
+            $type = $_POST['type'];
+            $getDispo = DisponibilitesRepo::getDisById($prof_id);
+        }
+        require_once __DIR__ . '/../Views/layouts/header.php';
+        require_once __DIR__ . '/../Views/reservations/reserveProf.php';
         require_once __DIR__ . '/../Views/layouts/footer.php';
     }
 }

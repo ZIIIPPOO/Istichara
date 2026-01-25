@@ -40,26 +40,42 @@
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
-                        <a href="/emploi"
-                            class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-                            <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
-                            Professionnel – Emploi du temps
-                        </a>
+                        <?php if ($_SESSION["user"]["role"] === 'avocat' || $_SESSION["user"]["role"] === 'huissier'): ?>
+                            <a href="/emploi"
+                                class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                                <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
+                                Professionnel – Emploi du temps
+                            </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION["user"]["role"] === 'client'): ?>
+                            <a href="/reservations"
+                                class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                                <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
+                               Domande – Professionnel
+                            </a>
+                        <?php endif; ?>
 
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
                             Statistiques
                         </a>
-
-                        <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-                            <i class="fas fa-plus text-amber-600 mr-3"></i>
-                            Nouveau Professionnel
-                        </a>
-                        <?php if ($_SESSION["user"]["role"]==='admin'): ?>
-                        <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                        <?php if ($_SESSION["user"]["role"] === 'avocat' || $_SESSION["user"]["role"] === 'huissier'): ?>
+                            <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                                <i class="fas fa-plus text-amber-600 mr-3"></i>
+                                Nouveau Professionnel
+                            </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION["user"]["role"] === 'admin'): ?>
+                            <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                                 <i class="fas fa-cogs text-amber-600 mr-3"></i>
-                            management
-                        </a>
+                                management
+                            </a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION["user"]["role"] === 'client'): ?>
+                            <a href="/client/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
+                                <i class="fas fa-cogs text-amber-600 mr-3"></i>
+                                management
+                            </a>
                         <?php endif; ?>
                     </nav>
                 </div>
@@ -95,10 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/client/reservation" class="btn-action btn-primary">
-                        <!-- <i class="fas fa-plus"></i> -->
-                        prof stats
-                    </a>
+
                     <a href="profs/stats?tarif=100&type=avocat&id=2" class="btn-action btn-primary">
                         <!-- <i class="fas fa-plus"></i> -->
                         prof stats
