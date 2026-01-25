@@ -40,17 +40,6 @@
                             <i class="fas fa-gavel text-amber-600 mr-3 text-lg"></i>
                             Huissiers de Justice
                         </a>
-<<<<<<< HEAD
-                        <?php endif; ?>
-                        <?php if ($_SESSION['role']==='huissier' || $_SESSION['role']==='avocat') :?>
-                        <a href="/emploi"
-                            class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-                            <i class="fas fa-calendar-week text-amber-600 mr-3 text-lg"></i>
-                            Professionnel – Emploi du temps
-                        </a>
-                        <?php endif; ?>
-                        <?php if ($_SESSION['role']==='admin'): ?>
-=======
                         <?php if ($_SESSION["user"]["role"] === 'avocat' || $_SESSION["user"]["role"] === 'huissier'): ?>
                             <a href="/emploi"
                                 class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
@@ -66,20 +55,10 @@
                             </a>
                         <?php endif; ?>
 
->>>>>>> feature/AvailabilityManagement
                         <a href="/stats" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                             <i class="fas fa-chart-pie text-amber-600 mr-3 text-lg"></i>
                             Statistiques
                         </a>
-<<<<<<< HEAD
-                        
-                        <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-                            <i class="fas fa-plus text-amber-600 mr-3"></i>
-                            Nouveau Professionnel
-                        </a>
-                        
-                        <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
-=======
                         <?php if ($_SESSION["user"]["role"] === 'avocat' || $_SESSION["user"]["role"] === 'huissier'): ?>
                             <a href="/toggle_form/create" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
                                 <i class="fas fa-plus text-amber-600 mr-3"></i>
@@ -88,7 +67,6 @@
                         <?php endif; ?>
                         <?php if ($_SESSION["user"]["role"] === 'admin'): ?>
                             <a href="/admin/dashboard" class="text-blue-100 hover:bg-blue-800 group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors">
->>>>>>> feature/AvailabilityManagement
                                 <i class="fas fa-cogs text-amber-600 mr-3"></i>
                                 management
                             </a>
@@ -104,6 +82,7 @@
                             <i class="fas fa-calendar-check text-amber-600 mr-3 text-lg"></i>
                             Réservations
                         </a>
+                        <?php endif; ?>
                         <?php endif; ?>
                     </nav>
                 </div>
@@ -182,15 +161,8 @@
                     </div>
                 </div>
             </div>
-            <!-- <script>
-    function loadDoc() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-    document.getElementById("notification").innerHTML = this.responseText;
-    }
-  xhttp.open("GET", "ajax_info.txt", true);
-  xhttp.send();
-}loadDoc();
-</script> -->
-            <!-- Page content -->
+
             <main class="flex-1">
+                <div class="py-6">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <!-- Replace with your content -->
