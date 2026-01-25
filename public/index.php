@@ -52,6 +52,7 @@ Router::get('admin/professional/pdf', 'AdminController', 'showPdf'); // View pro
 Router::get('stats', 'StatsController', 'index');              // General stats
 Router::get('profs/stats', 'DashboardController', 'index');    // Professional dashboard
 
+<<<<<<< HEAD
 Router::get('reservations', 'ReservationController', 'index'); // List reservations
 Router::get('reservations/create', 'ReservationController', 'create'); // Create reservation
 Router::get('reservations/accept', 'ReservationController', 'accept'); // Accept reservation
@@ -65,3 +66,26 @@ Router::get('emploi/edit', 'ProfessionnelController', 'editEmploi'); // Edit job
 // Dispatch the router
 Router::dispatch();
 ?>
+=======
+Router::get('toggle_form/create', 'AvocatController', 'createDynamic');
+
+Router::get('reservations', 'ReservationController', 'index');
+Router::get('reservations/create', 'ReservationController', 'create');
+Router::get('reservations/accept', 'ReservationController', 'accept');
+Router::get('reservations/reject', 'ReservationController', 'reject');
+Router::get('reservations/delete', 'ReservationController', 'delete');
+Router::get('User/signup', 'UserController', 'signUp');
+Router::get('User/signin', 'UserController', 'signIn');
+Router::get('User/verification', 'UserController', 'emailVerification');
+Router::get('verificationform', 'UserController', 'showconfirm');
+Router::get('showformpro', 'UserController', 'showformpro');
+Router::get('showconn', 'UserController', 'showconn');
+
+Router::get('emploi', 'ProfessionnelController', 'AjouteEmploi');
+Router::get('emploi/edit', 'ProfessionnelController', 'editEmploi');
+Router::get('reservation/disponibilite', 'ProfessionnelController', 'getProfsDispos');
+Router::get('reservation', 'ReservationController', 'showReservationForm');
+// Router::get('/reservations/create', 'ReservationController', 'create');
+
+Router::dispatch();
+>>>>>>> feature/AvailabilityManagement

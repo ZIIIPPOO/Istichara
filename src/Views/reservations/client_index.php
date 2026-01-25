@@ -5,7 +5,7 @@
             <h1 class="text-3xl font-bold text-gray-900">Mes Réservations</h1>
             <p class="mt-2 text-gray-600">Consultez vos demandes de rendez-vous</p>
         </div>
-        <a href="/reservations/create" class="mt-4 md:mt-0 px-6 py-3 bg-blue-900 text-white rounded-lg font-semibold hover:bg-blue-800 transition flex items-center justify-center gap-2">
+        <a href="/reservation" class="mt-4 md:mt-0 px-6 py-3 bg-blue-900 text-white rounded-lg font-semibold hover:bg-blue-800 transition flex items-center justify-center gap-2">
             <i class="fas fa-plus"></i>
             Nouvelle Réservation
         </a>

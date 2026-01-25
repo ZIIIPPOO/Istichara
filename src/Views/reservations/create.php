@@ -1,112 +1,112 @@
-<div class="py-6 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-2xl mx-auto">
-        
-        <!-- Header -->
-        <div class="mb-8 text-center">
-            <h1 class="text-3xl font-bold text-gray-900">Réserver une Consultation</h1>
-        </div>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 
-        <!-- Form -->
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            
-            <form action="/reservations/create" method="POST">
-                
-                <!-- TYPE: Avocat or Huissier (Radio buttons) -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-3">
-                        1. Type de professionnel <span class="text-red-500">*</span>
-                    </label>
-                    <div class="flex gap-4">
-                        <label class="cursor-pointer">
-                            <input type="radio" name="type" value="avocat" checked onchange="showType('avocat')">
-                            <span class="ml-2 font-semibold">Avocat</span>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="type" value="huissier" onchange="showType('huissier')">
-                            <span class="ml-2 font-semibold">Huissier</span>
-                        </label>
-                    </div>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-8">
+                    <?php if (!empty($error_msg)): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <?php foreach ($error_msg as $msg): ?>
+                        <p><?= $msg ?></p>
+                    <?php endforeach; ?>
                 </div>
+            <?php endif; ?>
+        <form action="/reservation/disponibilite" method="POST">
 
-                <!-- AVOCAT DROPDOWN (shown by default) -->
-                <div id="avocat_section" class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        2. Choisir un avocat <span class="text-red-500">*</span>
+            <!-- TYPE -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-3">
+                    1. Type de professionnel <span class="text-red-500">*</span>
+                </label>
+                <div class="flex gap-4">
+                    <label class="cursor-pointer">
+                        <input type="radio"
+                               name="type"
+                               value="avocat"
+                               checked
+                               onchange="showType('avocat')">
+                        <span class="ml-2 font-semibold">Avocat</span>
                     </label>
-                    <select name="avocat_id" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                        <option value="">-- Sélectionnez un avocat --</option>
-                        <?php foreach ($avocats as $avocat): ?>
-                            <option value="<?= $avocat['id'] ?>">
-                                <?= $avocat['name'] ?> - <?= $avocat['city'] ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
 
-                <!-- HUISSIER DROPDOWN (hidden by default) -->
-                <div id="huissier_section" class="mb-6" style="display: none;">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        2. Choisir un huissier <span class="text-red-500">*</span>
+                    <label class="cursor-pointer">
+                        <input type="radio"
+                               name="type"
+                               value="huissier"
+                               onchange="showType('huissier')">
+                        <span class="ml-2 font-semibold">Huissier</span>
                     </label>
-                    <select name="huissier_id" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                        <option value="">-- Sélectionnez un huissier --</option>
-                        <?php foreach ($huissiers as $huissier): ?>
-                            <option value="<?= $huissier['id'] ?>">
-                                <?= $huissier['name'] ?> - <?= $huissier['city'] ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
                 </div>
+            </div>
 
-                <!-- DATE -->
-                <div class="mb-6">
-                    <label for="date_reservation" class="block text-sm font-medium text-gray-700 mb-2">
-                        3. Date <span class="text-red-500">*</span>
-                    </label>
-                    <input type="date" name="date_reservation" required min="<?= date('Y-m-d') ?>"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                </div>
+            <!-- AVOCAT SELECT -->
+            <div id="avocat_section" class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    2. Choisir un avocat <span class="text-red-500">*</span>
+                </label>
+                <select name="prof_id"
+                        id="avocat_select"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                    <option value="">-- Sélectionnez un avocat --</option>
+                    <?php foreach ($avocats as $avocat): ?>
+                        <option value="<?= $avocat['user_id'] ?>">
+                            <?= htmlspecialchars($avocat['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-                <!-- TIME -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        4. Heure <span class="text-red-500">*</span>
-                    </label>
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="time" name="heure_debut" required 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                        <input type="time" name="heure_fin" required 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                    </div>
-                </div>
+            <!-- HUISSIER SELECT -->
+            <div id="huissier_section" class="mb-6" style="display:none;">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    2. Choisir un huissier <span class="text-red-500">*</span>
+                </label>
+                <select name="prof_id"
+                        id="huissier_select"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                        disabled>
+                    <option value="">-- Sélectionnez un huissier --</option>
+                    <?php foreach ($huissiers as $huissier): ?>
+                        <option value="<?= $huissier['user_id'] ?>">
+                            <?= htmlspecialchars($huissier['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-                <!-- MOTIF -->
-                <div class="mb-6">
-                    <label for="motif" class="block text-sm font-medium text-gray-700 mb-2">
-                        5. Motif <span class="text-red-500">*</span>
-                    </label>
-                    <textarea name="motif" required rows="4"
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg"
-                              placeholder="Décrivez votre besoin..."></textarea>
-                </div>
+            <button type="submit"
+                    class="w-full px-6 py-3 bg-blue-900 text-white rounded-lg font-semibold hover:bg-blue-800">
+                Select
+            </button>
 
-                <!-- SUBMIT -->
-                <button type="submit" 
-                        class="w-full px-6 py-3 bg-blue-900 text-white rounded-lg font-semibold hover:bg-blue-800">
-                    Envoyer la demande
-                </button>
-            </form>
-        </div>
+        </form>
+
     </div>
 </div>
+
 <script>
 function showType(type) {
+    const avocatSection = document.getElementById('avocat_section');
+    const huissierSection = document.getElementById('huissier_section');
+
+    const avocatSelect = document.getElementById('avocat_select');
+    const huissierSelect = document.getElementById('huissier_select');
+
     if (type === 'avocat') {
-        document.getElementById('avocat_section').style.display = 'block';
-        document.getElementById('huissier_section').style.display = 'none';
+        avocatSection.style.display = 'block';
+        huissierSection.style.display = 'none';
+
+        avocatSelect.disabled = false;
+        huissierSelect.disabled = true;
+        huissierSelect.value = '';
     } else {
-        document.getElementById('avocat_section').style.display = 'none';
-        document.getElementById('huissier_section').style.display = 'block';
+        avocatSection.style.display = 'none';
+        huissierSection.style.display = 'block';
+
+        avocatSelect.disabled = true;
+        huissierSelect.disabled = false;
+        avocatSelect.value = '';
     }
 }
 </script>
