@@ -1,25 +1,65 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
-
 class User
 {
     private int $id;
     private string $email;
     private string $password;
     private string $role;
-    // private string $nom;
+    private string $nom;
+    private string $prenom;
     private string $fullname;
-    private ?string $telephone;
+    private string $telephone;
     private string $status;
     private string $created_at;
     private string $update_at;
-
-    protected $db;
+    private $db;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
     }
+
+    public function signUp($data) //:bool
+    {
+        $stmt = $this->db->prepare("INSERT INTO `users` ( `email`, `password`, `role`, `fullname`, `telephone`, `status`) VALUES (?,?,?,?,?,?)");
+        if ($stmt->execute($data)) {
+            return $this->db->lastInsertId();
+        }
+    }
+
+    // In Models/User.php
+
+    public function signIn($data)
+{
+    // 1. Fetch user data including ID and Role
+    $stmt = $this->db->prepare("SELECT id, password, role, status FROM `users` where email = ?");
+    $stmt->execute([$data[0]]);
+    $result = $stmt->fetch();
+
+    if (!$result) {
+        return 'false_credentials';
+    }
+
+    if (password_verify($data[1], $result['password'])) {
+        if ($result['status'] == 'pending') {
+            return false; 
+        } else {
+            // FIX: Use $this->setId instead of self::setId
+            $this->setId($result['id']); 
+            
+            // FIX: Return an ARRAY, not just the role string
+            return [
+                'id' => $result['id'],
+                'role' => $result['role']
+            ];
+        }
+    } else {
+        return 'false_credentials';
+    }
+}
+
+
     public function getId(): int
     {
         return $this->id;
@@ -40,14 +80,22 @@ class User
         return $this->role;
     }
 
-    
+    public function getNom(): string
+    {
+        return $this->nom;
+    }
+
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
 
     public function getFullName(): string
     {
         return $this->fullname;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
@@ -69,10 +117,10 @@ class User
 
 
 
-    public function setId(int $id): self
+    public function setId(int $id)
     {
         $this->id = $id;
-        return $this;
+         return $this;
     }
 
     public function setEmail(string $email): self
@@ -92,15 +140,25 @@ class User
         $this->role = $role;
         return $this;
     }
- 
 
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+        return $this;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+        return $this;
+    }
     public function setFullName(string $fullname): self
     {
         $this->fullname = $fullname;
         return $this;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
         return $this;

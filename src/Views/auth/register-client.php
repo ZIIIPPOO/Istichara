@@ -70,24 +70,16 @@
                         <p class="text-gray-600 mt-2">Créez votre compte en quelques secondes</p>
                     </div>
 
-                    <form action="/register/client" method="POST" class="space-y-5">
+                    <form action="/User/signup" method="POST" class="space-y-5">
                         <!-- Nom & Prénom -->
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4">
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Nom <span class="text-red-500">*</span>
+                                    Nom Complet<span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nom" name="nom" required
+                                <input type="text" id="nom" name="fullname" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                                     placeholder="Alami">
-                            </div>
-                            <div>
-                                <label for="prenom" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Prénom <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" id="prenom" name="prenom" required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
-                                    placeholder="Mohamed">
                             </div>
                         </div>
 
@@ -118,6 +110,20 @@
                                 <input type="tel" id="telephone" name="telephone"
                                     class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                                     placeholder="06 12 34 56 78">
+                            </div>
+                        </div>
+
+                        <!-- Role -->
+                        <div>
+                            <label for="Role" class="block text-sm font-medium text-gray-700 mb-2">
+                                Role
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-circle-user-circle-user"></i>
+                                </div>
+                                <input type="radio" name="role" value="client" />Utilisateur</input>
+                                <input type="radio" name="role" value="admin">admin</input>
                             </div>
                         </div>
 
@@ -171,7 +177,7 @@
                     <!-- Login Link -->
                     <p class="text-center text-gray-600 mt-6">
                         Déjà inscrit ? 
-                        <a href="/login" class="text-blue-900 font-semibold hover:underline">Se connecter</a>
+                        <a href="showconn" class="text-blue-900 font-semibold hover:underline">Se connecter</a>
                     </p>
                 </div>
 
@@ -179,7 +185,7 @@
                 <div class="text-center mt-6">
                     <p class="text-gray-500 text-sm">
                         Vous êtes un professionnel ?
-                        <a href="/register/professional" class="text-amber-600 font-semibold hover:underline">
+                        <a href="showformpro" class="text-amber-600 font-semibold hover:underline">
                             Inscrivez-vous ici
                         </a>
                     </p>

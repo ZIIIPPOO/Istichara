@@ -26,7 +26,8 @@ class Avocat extends Person
     public function getAll()
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom FROM avocats
-        JOIN cities ON avocats.city_id = cities.id";
+        JOIN cities ON avocats.city_id = cities.id
+        WHERE avocats.asigned = 'accepted'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -100,8 +101,9 @@ class Avocat extends Person
     public function getAllPagination($start, $resultPerPage)
     {
         $sql = "SELECT avocats.*, cities.name as city, avocats.name as nom 
-            FROM avocats 
+            FROM avocats
             JOIN cities ON avocats.city_id = cities.id 
+            WHERE avocats.asigned = 'accepted'
             LIMIT $start, $resultPerPage";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
