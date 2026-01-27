@@ -54,7 +54,7 @@ class ReservationController
             $motif = $_POST['motif'] ?? '';
             $prof_id = $_POST['prof_id'];
             $error_msg = [];
-            require_once __DIR__ . '/../Re678tpositories/DisponibilitesRepo.php';
+            require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
             $Jour = [];
             if (!empty($prof_id) && !empty($jour_semaine)) {
                 $Jour = DisponibilitesRepo::getDispoByDay($prof_id, $jour_semaine);

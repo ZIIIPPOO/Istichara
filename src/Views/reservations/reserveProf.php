@@ -70,15 +70,11 @@
                         <input type="time"
                             name="heure_debut"
                             required
-                            step="60"
-                            value="08:00"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg">
 
                         <input type="time"
                             name="heure_fin"
                             required
-                            step="60"
-                            value="17:00"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg">
                     </div>
                 </div>
