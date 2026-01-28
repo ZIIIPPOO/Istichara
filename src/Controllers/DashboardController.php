@@ -5,8 +5,9 @@ class DashboardController
 
     public function index()
     {
-        $dashboard = new Dashboard();
 
+
+        $dashboard = new Dashboard();
 
         // var_dump($dashboard->getHourOfWork());
 

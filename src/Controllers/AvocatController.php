@@ -32,7 +32,7 @@ class AvocatController
 
         $Avocat = new Avocat();
         $avocat = $Avocat->profile($id);
-        
+
         require_once __DIR__ . '/../Repositories/DisponibilitesRepo.php';
 
         $Disponibilite = new DisponibilitesRepo();
@@ -143,46 +143,5 @@ class AvocatController
             header('Location: /avocats');
             exit();
         }
-    }
-    public function createDynamic()
-    {
-        require_once __DIR__ . '/../Models/Avocat.php';
-        require_once __DIR__ . '/../Models/Huissier.php';
-        require_once __DIR__ . '/../Models/City.php';
-
-        $cityy = new City();
-        $cities = $cityy->getAll();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $type = $_POST['type'];
-
-            if ($type === 'avocat') {
-                $avocat = new Avocat();
-                $avocat->setName($_POST['nom']);
-                $avocat->setYearsOfEXp($_POST['annees_experience']);
-                $avocat->setSpecialites($_POST['specialites']);
-                $avocat->setTarifHoraire($_POST['tarif_horaire']);
-                $avocat->setConsultationEnligne($_POST['consultation_en_ligne']);
-                $cityId = $cityy->getIdByName($_POST['ville']);
-                $avocat->setCityId($cityId);
-                $avocat->create();
-                header('Location: /avocats');
-            } else {
-                $huissier = new Huissier();
-                $huissier->setName($_POST['nom']);
-                $huissier->setYearsOfEXp($_POST['annees_experience']);
-                $huissier->setTypeActes($_POST['types_actes']);
-                $huissier->setTarifHoraire($_POST['tarif_horaire']);
-                $cityId = $cityy->getIdByName($_POST['ville']);
-                $huissier->setCityId($cityId);
-                $huissier->create();
-                header('Location: /huissiers');
-            }
-            exit();
-        }
-
-        require_once __DIR__ . '/../Views/layouts/header.php';
-        require_once __DIR__ . '/../Views/toggle_form/create.php';
-        require_once __DIR__ . '/../Views/layouts/footer.php';
     }
 }

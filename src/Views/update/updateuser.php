@@ -11,7 +11,7 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <form action="/store/user?type=<?= $_SESSION['user']['role'] ?>" method="POST">
+            <form action="/store/user" method="POST">
                 <div class="p-8 space-y-6">
 
                     <!-- Hidden ID -->
@@ -53,52 +53,14 @@
                                     Téléphone
                                 </label>
                                 <input type="text" name="telephone"
-                                    value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : ($user->getTelephone())) ?>"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                            </div>
-                            <?php if ($_SESSION['user']['role'] === 'avocat'): ?>
-                                <!-- Specialite -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Specialite
-                                    </label>
-                                    <input type="text" name="specialites"
-                                        value="<?= htmlspecialchars($object['specialites']) ?>"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($_SESSION['user']['role'] === 'huissier'): ?>
-                                <!-- type_actes -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        type actes
-                                    </label>
-                                    <input type="text" name="type_actes"
-                                        value="<?= htmlspecialchars($object['type_actes']) ?>"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                                </div>
-                            <?php endif; ?>
-                            <!-- annees_experience -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Annees experience
-                                </label>
-                                <input type="number" name="annees_experience"
-                                    value="<?= htmlspecialchars($object['annees_experience']) ?>"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                            </div>
-                            <!-- tarif_horaire -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Tarif horaire
-                                </label>
-                                <input type="number" name="tarif_horaire"
-                                    value="<?= htmlspecialchars($object['tarif_horaire']) ?>"
+                                    value="<?= htmlspecialchars(is_null($user->getTelephone()) ? "" : $user->getTelephone()) ?>"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
                             </div>
 
                         </div>
                     </div>
+
+                 
 
                     <!-- Sécurité & Rôle -->
                     <div class="border-b border-gray-200 pb-6">
@@ -157,28 +119,17 @@
 
 
                             <!-- Role -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Rôle
-                                </label>
-                                <select name="role" disabled
+                            <!-- <div> -->
+                            <!-- <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Rôle -->
+                            <!-- </label>
+                                <input readonly type="text" name="role" value=" < ?= $user->getRole() ?>"> -->
+                            <!-- <select name="role" readonly
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                                    <option value="ADMIN" <?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
-                                    <option value="USER" <?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
-                                </select>
-                            </div>
-                            <?php if ($_SESSION['user']['role'] === "avocat"): ?>
-                                <!-- consultation_en_ligne -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        consultation en ligne
-                                    </label>
-                                    <select name="consultation_en_ligne"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-900">
-                                        <option value=1 <?= $object['consultation_en_ligne'] === 1 ? 'selected' : '' ?>>yes</option>
-                                        <option value=0 <?= $object['consultation_en_ligne'] === 0 ? 'selected' : '' ?>>no</option>
-                                    </select>
-                                </div>
+                                    <option value="admin" < ?= $user->getRole() === 'admin' ? 'selected' : '' ?>>Admin</option>
+                                    <option value="user" < ?= $user->getRole() === 'user' ? 'selected' : '' ?>>User</option>
+                                </select> -->
+                            <!-- </div> -->
 
                         </div>
                     </div>
@@ -214,12 +165,12 @@
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="flex items-center justify-end space-x-4 pt-6">
-                    <a href="/users" class="btn-action btn-secondary">
-                        <i class="fas fa-times"></i>
-                        Annuler
-                    </a>
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-end space-x-4 pt-6">
+                        <a href="/avocat/profile" class="btn-action btn-secondary">
+                            <i class="fas fa-times"></i>
+                            Annuler
+                        </a>
 
                     <button type="submit" class="btn-action btn-primary">
                         <i class="fas fa-save"></i>

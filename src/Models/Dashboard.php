@@ -11,7 +11,7 @@ class Dashboard
     }
 
     private float $totalMoney;
-    private int $totalDemande; /// reservation
+    private int $totalDemande ; /// reservation
     private int $nomberClientUnique; /// save by ip
 
     private int $totalHour;
@@ -62,7 +62,7 @@ class Dashboard
     private  function getStatics(): void
     {
         try {
-            $id = $_GET["id"];
+            $id = $_GET["id"]; //\/ id from avocat (or huissier) table
             $type = $_GET["type"];
             $tarif = $_GET["tarif"];
             $db = Database::getInstance()->getConnection();
